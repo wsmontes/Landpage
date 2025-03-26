@@ -1,0 +1,11 @@
+# CONTACT INFORMATION
+---
+
+Feel free to reach out through any of the following channels:
+
+@table
+Email:|{{email}}
+LinkedIn:|[linkedin.com/in/wsmontes]({{link:linkedin}})
+GitHub:|[github.com/wsmontes]({{link:github}})
+IMDB:|[IMDB Profile]({{link:imdb}})
+@end

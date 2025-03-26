@@ -1,0 +1,23 @@
+# PROFESSIONAL PROFILE
+---
+
+$green:Wagner Montes, o Divino
+$white:Business Analyst || Product Developer || Solution Architect
+
+I am a hybrid IT professional, with solid business analysis experience, product development background and coding skills. Comfortable working with complex business requirements as well as leading development directly. Hands-on experience with generative models, extensive technical background and huge interest in conversational solutions.
+
+I specialize in digital transformation, business architecture, change management, and technical roles involving data analysis, automation, data transformation, and product development. My journey has seen me work in diverse sectors such as government, telecommunications, and healthcare.
+
+$yellow:$ cat education.txt
+```
+• The University of British Columbia - Key Capabilities in Data Science (2021-2022)
+• USP - Universidade de São Paulo - Master's Degree, Computer Software and Media Applications (2011-2014)
+• USP - Universidade de São Paulo - Communication, Mass Communication/Media Studies (2004-2010)
+```
+
+$yellow:$ cat certifications.txt
+```
+• Microsoft Certified: Azure AI Fundamentals
+• Certified DataWalk Technical Professional
+• Certified Sales Associate
+```

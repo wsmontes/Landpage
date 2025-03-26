@@ -1,0 +1,23 @@
+# TECHNICAL CAPABILITIES
+---
+
+@skill:Business Analysis:95:green
+
+@skill:Artificial Intelligence:90:green
+
+@skill:Data Science:85:green
+
+@skill:Product Development:90:green
+
+@skill:Process Modeling:90:green
+
+## ADDITIONAL EXPERTISE
+---
+
+@skill:Agile Methodologies:92:green
+
+@skill:Change Management:90:green
+
+@skill:Technical Writing:88:green
+
+@skill:Workshop Facilitation:85:green

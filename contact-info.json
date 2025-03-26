@@ -1,0 +1,15 @@
+{
+  "email": {
+    "prefix": "w",
+    "middle": "mon",
+    "suffix": "tes",
+    "domain": "gma",
+    "tld": "il.com"
+  },
+  "links": {
+    "linkedin": "https://www.linkedin.com/in/wsmontes/",
+    "github": "https://github.com/wsmontes",
+    "imdb": "https://www.imdb.com/name/nm9506783/",
+    "source": "https://github.com/wsmontes/Landpage"
+  }
+}

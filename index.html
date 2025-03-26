@@ -55,6 +55,29 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- Additional CSS for content manager -->
+    <style>
+        .refresh-button {
+            font-size: 0.8em;
+            padding: 2px 5px;
+            margin-left: 10px;
+        }
+        .content-footer {
+            font-size: 0.8em;
+            text-align: right;
+            margin-top: 20px;
+            color: #888;
+        }
+        .loading {
+            color: yellow;
+            font-style: italic;
+        }
+        .error {
+            color: red;
+            font-style: italic;
+        }
+    </style>
 </head>
 
 <body>
@@ -97,17 +120,17 @@
                 </li>
                 <div class="tui-black-divider"></div>
                 <li>
-                    <a href="https://www.linkedin.com/in/wsmontes/" target="_blank">
+                    <a href="#" data-link-type="linkedin" target="_blank">
                         <span class="red-168-text">L</span>inkedIn
                     </a>
                 </li>
                 <li>
-                    <a href="https://github.com/wsmontes" target="_blank">
+                    <a href="#" data-link-type="github" target="_blank">
                         <span class="red-168-text">G</span>itHub
                     </a>
                 </li>
                 <li>
-                    <a href="https://www.imdb.com/name/nm9506783/" target="_blank">
+                    <a href="#" data-link-type="imdb" target="_blank">
                         <span class="red-168-text">I</span>MDB
                     </a>
                 </li>
@@ -139,197 +162,28 @@
                     <!-- About Section -->
                     <div class="tui-tab-content" id="about">
                         <div class="section-content">
-                            <h3 class="cyan-168-text">PROFESSIONAL PROFILE</h3>
-                            <div class="tui-divider"></div>
-                            <br>
-                            <div class="green-168-text">Wagner Montes</div>
-                            <div class="white-255-text">Business Analyst || Product Developer || Solution Architect</div>
-                            <br>
-                            <p>I am a hybrid IT professional, with solid business analysis experience, product development background and coding skills. Comfortable working with complex business requirements as well as leading development directly. Hands-on experience with generative models, extensive technical background and huge interest in conversational solutions.</p>
-                            <br>
-                            <p>I specialize in digital transformation, business architecture, change management, and technical roles involving data analysis, automation, data transformation, and product development. My journey has seen me work in diverse sectors such as government, telecommunications, and healthcare.</p>
-                            <br>
-                            <div class="yellow-168-text">$ cat education.txt</div>
-                            <pre class="white-255-text">
-• The University of British Columbia - Key Capabilities in Data Science (2021-2022)
-• USP - Universidade de São Paulo - Master's Degree, Computer Software and Media Applications (2011-2014)
-• USP - Universidade de São Paulo - Communication, Mass Communication/Media Studies (2004-2010)
-                            </pre>
-                            <br>
-                            <div class="yellow-168-text">$ cat certifications.txt</div>
-                            <pre class="white-255-text">
-• Microsoft Certified: Azure AI Fundamentals
-• Certified DataWalk Technical Professional
-• Certified Sales Associate
-                            </pre>
+                            <!-- Content will be loaded from about.txt -->
                         </div>
                     </div>
                     
                     <!-- Skills Section -->
                     <div class="tui-tab-content" id="skills">
                         <div class="section-content">
-                            <h3 class="cyan-168-text">TECHNICAL CAPABILITIES</h3>
-                            <div class="tui-divider"></div>
-                            <br>
-                            <div class="skill-bar">
-                                <span class="yellow-168-text">Business Analysis</span>
-                                <div class="tui-progress-bar inline-block valign-middle" style="width: 300px; margin-left: 20px;">
-                                    <span class="tui-progress-label black-text">95%</span>
-                                    <span class="tui-progress green-168" style="width: 95%"></span>
-                                </div>
-                            </div>
-                            
-                            <div class="skill-bar">
-                                <span class="yellow-168-text">Artificial Intelligence</span>
-                                <div class="tui-progress-bar inline-block valign-middle" style="width: 300px; margin-left: 20px;">
-                                    <span class="tui-progress-label black-text">90%</span>
-                                    <span class="tui-progress green-168" style="width: 90%"></span>
-                                </div>
-                            </div>
-                            
-                            <div class="skill-bar">
-                                <span class="yellow-168-text">Data Science</span>
-                                <div class="tui-progress-bar inline-block valign-middle" style="width: 300px; margin-left: 20px;">
-                                    <span class="tui-progress-label black-text">85%</span>
-                                    <span class="tui-progress green-168" style="width: 85%"></span>
-                                </div>
-                            </div>
-                            
-                            <div class="skill-bar">
-                                <span class="yellow-168-text">Product Development</span>
-                                <div class="tui-progress-bar inline-block valign-middle" style="width: 300px; margin-left: 20px;">
-                                    <span class="tui-progress-label black-text">90%</span>
-                                    <span class="tui-progress green-168" style="width: 90%"></span>
-                                </div>
-                            </div>
-                            
-                            <div class="skill-bar">
-                                <span class="yellow-168-text">Process Modeling</span>
-                                <div class="tui-progress-bar inline-block valign-middle" style="width: 300px; margin-left: 20px;">
-                                    <span class="tui-progress-label black-text">90%</span>
-                                    <span class="tui-progress green-168" style="width: 90%"></span>
-                                </div>
-                            </div>
-                            
-                            <br>
-                            <h4 class="cyan-168-text">ADDITIONAL EXPERTISE</h4>
-                            <div class="tui-divider"></div>
-                            <br>
-                            <div class="skill-bar">
-                                <span class="yellow-168-text">Agile Methodologies</span>
-                                <div class="tui-progress-bar inline-block valign-middle" style="width: 300px; margin-left: 20px;">
-                                    <span class="tui-progress-label black-text">92%</span>
-                                    <span class="tui-progress green-168" style="width: 92%"></span>
-                                </div>
-                            </div>
-                            
-                            <div class="skill-bar">
-                                <span class="yellow-168-text">Change Management</span>
-                                <div class="tui-progress-bar inline-block valign-middle" style="width: 300px; margin-left: 20px;">
-                                    <span class="tui-progress-label black-text">90%</span>
-                                    <span class="tui-progress red-168" style="width: 90%"></span>
-                                </div>
-                            </div>
-                            
-                            <div class="skill-bar">
-                                <span class="yellow-168-text">Technical Writing</span>
-                                <div class="tui-progress-bar inline-block valign-middle" style="width: 300px; margin-left: 20px;">
-                                    <span class="tui-progress-label black-text">88%</span>
-                                    <span class="tui-progress blue-168" style="width: 88%"></span>
-                                </div>
-                            </div>
-                            
-                            <div class="skill-bar">
-                                <span class="yellow-168-text">Workshop Facilitation</span>
-                                <div class="tui-progress-bar inline-block valign-middle" style="width: 300px; margin-left: 20px;">
-                                    <span class="tui-progress-label black-text">85%</span>
-                                    <span class="tui-progress yellow-168" style="width: 85%"></span>
-                                </div>
-                            </div>
+                            <!-- Content will be loaded from skills.txt -->
                         </div>
                     </div>
                     
                     <!-- Projects Section (now Experience) -->
                     <div class="tui-tab-content" id="projects">
                         <div class="section-content">
-                            <h3 class="cyan-168-text">PROFESSIONAL EXPERIENCE</h3>
-                            <div class="tui-divider"></div>
-                            <br>
-                            <div class="project-card tui-panel white-168">
-                                <div class="tui-panel-header">
-                                    <span class="tui-panel-title blue-255-text">ICBC (Insurance Corporation of British Columbia)</span>
-                                </div>
-                                <div class="tui-panel-content black-255-text">
-                                    <p>Business System Analyst working on digital transformation initiatives, enhancing insurance systems and processes.</p>
-                                    <br>
-                                    <div><span class="red-168-text">Position:</span> Business System Analyst</div>
-                                    <div><span class="red-168-text">Period:</span> Jan 2025 - Present</div>
-                                    <div><span class="red-168-text">Location:</span> Victoria, British Columbia, Canada</div>
-                                </div>
-                            </div>
-                            
-                            <div class="project-card tui-panel white-168">
-                                <div class="tui-panel-header">
-                                    <span class="tui-panel-title blue-255-text">Lotier International</span>
-                                </div>
-                                <div class="tui-panel-content black-255-text">
-                                    <p>Consultant for AI solutions, working with data modeling, process modeling, and implementing large language models for business applications.</p>
-                                    <br>
-                                    <div><span class="red-168-text">Position:</span> Consultant - AI Solution</div>
-                                    <div><span class="red-168-text">Period:</span> May 2021 - Present</div>
-                                    <div><span class="red-168-text">Key Skills:</span> Data Modeling, AI, LLM, Prompt Engineering, NLP</div>
-                                </div>
-                            </div>
-                            
-                            <div class="project-card tui-panel white-168">
-                                <div class="tui-panel-header">
-                                    <span class="tui-panel-title blue-255-text">CGI</span>
-                                </div>
-                                <div class="tui-panel-content black-255-text">
-                                    <p>Senior Consultant and Consultant roles focused on healthcare IT, data analysis, and business architecture for government clients.</p>
-                                    <br>
-                                    <div><span class="red-168-text">Position:</span> Consultant to Senior Consultant</div>
-                                    <div><span class="red-168-text">Period:</span> Apr 2022 - Jan 2025</div>
-                                    <div><span class="red-168-text">Key Skills:</span> Healthcare IT, Business Architecture, Workshop Facilitation</div>
-                                </div>
-                            </div>
-                            
-                            <div class="project-card tui-panel white-168">
-                                <div class="tui-panel-header">
-                                    <span class="tui-panel-title blue-255-text">PARC Systems Inc</span>
-                                </div>
-                                <div class="tui-panel-content black-255-text">
-                                    <p>Technical Business Analyst working with data analysis, process modeling, and healthcare information technology.</p>
-                                    <br>
-                                    <div><span class="red-168-text">Position:</span> Technical Business Analyst</div>
-                                    <div><span class="red-168-text">Period:</span> Nov 2019 - Mar 2022</div>
-                                    <div><span class="red-168-text">Key Skills:</span> RPA, Process Automation, Data Analysis</div>
-                                </div>
-                            </div>
+                            <!-- Content will be loaded from experience.txt -->
                         </div>
                     </div>
                     
                     <!-- Contact Section -->
                     <div class="tui-tab-content" id="contact">
                         <div class="section-content">
-                            <h3 class="cyan-168-text">CONTACT INFORMATION</h3>
-                            <div class="tui-divider"></div>
-                            <br>
-                            <p>Feel free to reach out through any of the following channels:</p>
-                            <br>
-                            <table class="tui-table contact-table">
-                                <tbody>
-                                    <tr>
-                                        <td class="yellow-168-text">Email:</td>
-                                        <td><a href="#" class="email-link" onclick="handleEmailClick(event)">Click to reveal email</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="yellow-168-text">LinkedIn:</td>
-                                        <td><a href="https://www.linkedin.com/in/wsmontes/" target="_blank">linkedin.com/in/wsmontes</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <!-- Thank you message removed -->
+                            <!-- Content will be loaded from contact.txt -->
                         </div>
                     </div>
                     
@@ -340,15 +194,15 @@
         <!-- Status bar -->
         <div class="tui-statusbar absolute">
             <ul>
-                <li><a href="https://www.linkedin.com/in/wsmontes/" target="_blank"><span class="red-168-text">F1</span> LinkedIn</a></li>
-                <li><a href="https://github.com/wsmontes" target="_blank"><span class="red-168-text">F2</span> GitHub</a></li>
-                <li><a href="https://www.imdb.com/name/nm9506783/" target="_blank"><span class="red-168-text">F3</span> IMDB</a></li>
+                <li><a href="#" data-link-type="linkedin" target="_blank"><span class="red-168-text">F1</span> LinkedIn</a></li>
+                <li><a href="#" data-link-type="github" target="_blank"><span class="red-168-text">F2</span> GitHub</a></li>
+                <li><a href="#" data-link-type="imdb" target="_blank"><span class="red-168-text">F3</span> IMDB</a></li>
                 <li><a href="#" class="email-link" onclick="handleEmailClick(event)"><span class="red-168-text">F4</span> Email</a></li>
             </ul>
             <ul class="right-align-menu">
                 <li class="source-code-dropdown">
                     <div class="tui-dropdown">
-                        <a href="https://github.com/wsmontes/Landpage" target="_blank"><span class="red-168-text">F10</span> Source Code</a>
+                        <a href="#" data-link-type="source" target="_blank"><span class="red-168-text">F10</span> Source Code</a>
                         <div class="tui-dropdown-content" style="bottom: 100%; top: auto;">
                             <ul>
                                 <li>Template based on <a href="https://github.com/vinibiavatti1/TuiCss" target="_blank">TuiCss</a></li>
@@ -368,6 +222,8 @@
     <script src="tuicss.min.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/terminal-ui.js"></script>
+    <script src="js/contact-manager.js"></script>
+    <script src="js/content-manager.js"></script>
 </body>
 
 </html>

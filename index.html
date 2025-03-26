@@ -25,98 +25,215 @@
         
         .section-content {
             margin-bottom: 20px;
+            padding: 0 15px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .skill-bar {
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            width: 100%;
         }
         
         .project-card {
             margin-bottom: 15px;
+            width: 100%;
+            max-width: 100%;
         }
         
         .content-area {
             height: calc(100vh - 120px);
             overflow-y: auto;
+            padding-right: 5px;
+            padding-bottom: 20px;
+            width: 100%;
         }
         
         .tui-window.full-width {
             height: calc(100% - 80px);
             margin-top: 40px;
+            width: 100%;
+            max-width: 100%;
+            margin-left: 0;
+            margin-right: 0;
         }
         
         .tui-fieldset {
             height: 100%;
             display: flex;
             flex-direction: column;
+            width: 100%;
         }
         
         .tui-tabs {
             flex-shrink: 0;
+            width: 100%;
         }
         
-        /* Responsive styles for mobile */
+        /* Improved mobile scrolling */
+        .content-area::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .content-area::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 168, 168, 0.7);
+        }
+        
+        /* Equal width for experience company boxes */
+        #projects .project-card {
+            width: 100%;
+            box-sizing: border-box;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        #projects .section-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        /* Ensure company panels have equal height content areas */
+        #projects .tui-panel-content {
+            min-height: 180px;
+        }
+        
+        /* Make skill bars more responsive */
+        .skill-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .skill-bar span {
+            min-width: 180px;
+            margin-right: 15px;
+        }
+        
+        .skill-bar .tui-progress-bar {
+            flex: 1;
+            min-width: 150px;
+            max-width: none;
+            width: calc(100% - 200px);
+        }
+        
+        /* Table responsiveness */
+        .tui-table {
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        /* Better spacing for content */
+        pre {
+            white-space: pre-wrap;
+            word-break: break-word;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Optimized layout for large screens */
+        @media screen and (min-width: 1400px) {
+            .section-content {
+                max-width: 80%;
+                padding: 0 30px;
+            }
+            
+            #projects .project-card {
+                display: inline-block;
+                width: calc(50% - 20px);
+                margin: 10px;
+                vertical-align: top;
+            }
+            
+            #projects .section-content {
+                display: block;
+                text-align: center;
+            }
+            
+            .skill-bar .tui-progress-bar {
+                max-width: 60%;
+            }
+        }
+        
+        /* Enhanced Responsive styles for mobile */
+        @media screen and (max-width: 992px) {
+            .tui-window.full-width {
+                width: 100%;
+                margin: 40px 0 0 0;
+                box-shadow: none !important;
+            }
+            
+            .skill-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .skill-bar span {
+                margin-bottom: 5px;
+            }
+            
+            .skill-bar .tui-progress-bar {
+                width: 100%;
+                max-width: 100%;
+                margin-left: 0 !important;
+            }
+            
+            .tui-tabs ul {
+                display: flex;
+                justify-content: space-between;
+            }
+            
+            .tui-tabs ul li {
+                flex: 1;
+                text-align: center;
+            }
+            
+            .tui-tab {
+                padding: 5px 2px;
+                font-size: 0.9em;
+            }
+        }
+        
         @media screen and (max-width: 768px) {
+            html, body {
+                overflow: auto;
+            }
+            
             .fullscreen-container {
                 width: 100% !important;
-                height: 100vh !important;
-                overflow: auto;
-                border: none !important;
+                height: auto !important;
+                min-height: 100vh;
+                overflow: visible;
             }
             
             .tui-window.full-width {
                 height: auto;
                 min-height: calc(100vh - 80px);
+                margin-bottom: 40px;
             }
             
-            .tui-window.full-width .tui-fieldset {
-                padding: 10px;
+            .tui-fieldset {
                 height: auto;
+                min-height: calc(100vh - 100px);
             }
             
             .content-area {
                 height: auto;
-                max-height: calc(100vh - 150px);
+                min-height: 300px;
+                max-height: unset;
+                overflow-y: visible;
             }
             
-            /* Adjust skill bars for mobile */
-            .skill-bar {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                margin-bottom: 15px;
-            }
-            
-            .skill-bar .tui-progress-bar {
-                margin-left: 0 !important;
-                margin-top: 5px;
-                width: 100% !important;
-                max-width: 100%;
-            }
-            
-            /* Make charts responsive */
-            .tui-chart-horizontal {
-                width: 100% !important;
-                max-width: 100%;
-            }
-            
-            /* Adjust form inputs for mobile */
-            .tui-input, textarea.tui-input {
-                width: 100% !important;
-                max-width: 100%;
-                box-sizing: border-box;
-            }
-            
-            /* Improve touch targets on mobile */
-            .tui-button {
-                padding: 8px 12px;
-                margin-bottom: 8px;
-                margin-right: 8px;
-            }
-            
-            /* Hide certain elements on mobile */
-            .tui-shortcut {
-                display: none;
+            .tui-window.full-width .tui-fieldset {
+                padding: 10px;
             }
             
             /* Improve sidenav for mobile */
@@ -127,58 +244,92 @@
             }
             
             /* Status bar adjustments */
+            .tui-statusbar {
+                height: auto;
+            }
+            
             .tui-statusbar ul {
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: space-around;
+                padding: 5px 0;
             }
             
             .tui-statusbar ul li {
-                margin: 5px;
+                margin: 3px;
+                padding: 5px;
             }
             
             .tui-statusbar-divider {
                 display: none;
             }
             
-            /* Tab adjustments */
-            .tui-tabs ul {
+            /* Improved touch targets */
+            .tui-button, .tui-tab, .tui-nav ul li, .tui-sidenav ul li, .tui-statusbar ul li {
+                padding: 8px 12px;
+            }
+            
+            .tui-nav {
+                padding: 5px 0;
+            }
+            
+            .tui-nav ul li {
+                margin-left: 5px;
+                padding: 5px 8px;
+            }
+            
+            /* Panel adjustments */
+            #projects .tui-panel-content {
+                min-height: auto;
+                padding: 15px;
+            }
+            
+            /* Improve dropdown experience */
+            .tui-dropdown-content {
+                min-width: 150px;
+                right: 0;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .tui-nav ul {
                 display: flex;
                 flex-wrap: wrap;
             }
             
-            .tui-tabs ul li {
-                flex: 1 1 auto;
+            .tui-datetime {
+                width: 100%;
                 text-align: center;
+                margin-bottom: 5px;
+                margin-right: 0;
             }
             
-            /* Project cards adjustments */
-            .project-card .tui-panel-content {
-                padding: 10px;
+            .tui-sidenav-button {
+                margin-left: 10px !important;
             }
-        }
-        
-        /* Equal width for experience company boxes */
-        #projects .project-card {
-            width: 80%;
-            box-sizing: border-box;
-        }
-        
-        #projects .section-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-        
-        /* Ensure company panels have equal height content areas */
-        #projects .tui-panel-content {
-            min-height: 180px;
-        }
-        
-        /* Responsive adjustments for experience section */
-        @media screen and (max-width: 768px) {
-            #projects .tui-panel-content {
-                min-height: auto;
+            
+            .section-content {
+                padding: 0 10px;
+            }
+            
+            /* Optimize vertical space */
+            h3, h4 {
+                margin: 10px 0;
+            }
+            
+            .tui-divider {
+                margin: 5px 0;
+            }
+            
+            /* Ensure text doesn't overflow */
+            pre, p, div {
+                max-width: 100%;
+                word-break: break-word;
+            }
+            
+            /* Better spacing in tables */
+            .tui-table td {
+                padding: 8px 5px;
             }
         }
     </style>
@@ -565,17 +716,61 @@
             });
         });
         
-        // Adjust height for different screen sizes
+        // Improved resize handler
         function handleResize() {
             const windowHeight = window.innerHeight;
+            const windowWidth = window.innerWidth;
             const contentArea = document.querySelector('.content-area');
+            const navHeight = document.querySelector('.tui-nav').offsetHeight;
+            const tabsHeight = document.querySelector('.tui-tabs').offsetHeight;
+            const statusbarHeight = document.querySelector('.tui-statusbar').offsetHeight;
             
-            if (window.innerWidth <= 480) {
-                contentArea.style.maxHeight = `${windowHeight - 150}px`;
-            } else if (window.innerWidth <= 768) {
-                contentArea.style.maxHeight = `${windowHeight - 120}px`;
+            if (window.innerWidth <= 768) {
+                // Mobile: scrolling happens on the body instead
+                contentArea.style.height = 'auto';
+                contentArea.style.maxHeight = 'none';
+                
+                // Reset body/html overflow for mobile
+                document.body.style.overflow = 'auto';
+                document.documentElement.style.overflow = 'auto';
             } else {
-                contentArea.style.height = `${windowHeight - 120}px`;
+                // Desktop: calculate exact content area height
+                const availableHeight = windowHeight - navHeight - tabsHeight - statusbarHeight - 40;
+                contentArea.style.height = `${availableHeight}px`;
+                
+                // Keep the terminal-like overflow only on desktop
+                document.body.style.overflow = 'hidden';
+                document.documentElement.style.overflow = 'hidden';
+                
+                // Adjust progress bars on larger screens
+                const skillBars = document.querySelectorAll('.skill-bar .tui-progress-bar');
+                skillBars.forEach(bar => {
+                    if (windowWidth >= 1400) {
+                        bar.style.width = `calc(100% - 200px)`;
+                        bar.style.maxWidth = '60%';
+                    } else {
+                        bar.style.width = `calc(100% - 200px)`;
+                        bar.style.maxWidth = 'none';
+                    }
+                });
+                
+                // Adjust project cards layout
+                const projectCards = document.querySelectorAll('#projects .project-card');
+                if (windowWidth >= 1400) {
+                    projectCards.forEach(card => {
+                        card.style.display = 'inline-block';
+                        card.style.width = 'calc(50% - 20px)';
+                        card.style.margin = '10px';
+                    });
+                    document.querySelector('#projects .section-content').style.display = 'block';
+                } else {
+                    projectCards.forEach(card => {
+                        card.style.display = 'block';
+                        card.style.width = '100%';
+                        card.style.margin = '0 0 15px 0';
+                    });
+                    document.querySelector('#projects .section-content').style.display = 'flex';
+                }
             }
         }
         
@@ -586,32 +781,46 @@
             const domain = "gmail.com";
             const email = user + "@" + domain;
             
-            // Update link href and text
-            event.target.closest('a').href = "mailto:" + email;
-            
-            // If the clicked element is the link itself (not a child element)
-            if (event.target.classList.contains('email-link')) {
-                event.target.textContent = email;
-            } 
-            // If we clicked on a child element inside the email link
-            else if (event.target.closest('.email-link')) {
-                const linkElement = event.target.closest('.email-link');
-                // Preserve any HTML inside the link (like styled letters)
-                if (linkElement.querySelector('span')) {
-                    const spanElement = linkElement.querySelector('span');
+            // Update all email links
+            document.querySelectorAll('.email-link').forEach(link => {
+                link.href = "mailto:" + email;
+                
+                // Keep any styled spans inside
+                if (link.querySelector('span')) {
+                    const spanElement = link.querySelector('span');
                     const spanText = spanElement.textContent;
-                    linkElement.innerHTML = `<span class="${spanElement.className}">${spanText}</span>mail: ${email}`;
+                    link.innerHTML = `<span class="${spanElement.className}">${spanText}</span>mail: ${email}`;
                 } else {
-                    linkElement.textContent = email;
+                    link.textContent = email;
                 }
-            }
+            });
             
             return true;
         }
         
         // Initialize
-        window.addEventListener('load', handleResize);
+        window.addEventListener('load', function() {
+            handleResize();
+            
+            // Add passive touch handlers for better scrolling on mobile
+            const contentArea = document.querySelector('.content-area');
+            if (contentArea) {
+                contentArea.addEventListener('touchstart', function() {}, {passive: true});
+                contentArea.addEventListener('touchmove', function() {}, {passive: true});
+            }
+        });
+        
         window.addEventListener('resize', handleResize);
+        
+        // Disable double-tap zoom on mobile
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
     </script>
 </body>
 

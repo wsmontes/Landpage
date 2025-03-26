@@ -102,6 +102,13 @@ html, body {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
+    table-layout: fixed; /* Add fixed layout for better control */
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+#contact table td {
+    word-wrap: break-word; /* Allow words to break and wrap */
+    overflow-wrap: break-word;
 }
 
 /* Text styles */

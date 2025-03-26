@@ -290,6 +290,30 @@
         flex: 0 0 auto; /* Prevent shrinking */
     }
     
+    /* Contact section fixes */
+    #contact .section-content {
+        padding: 0 5px;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+    
+    .contact-table {
+        width: 100%;
+        table-layout: fixed;
+        box-sizing: border-box;
+    }
+    
+    .contact-table td {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        padding: 5px;
+    }
+    
+    .contact-table td:first-child {
+        width: 30%;
+    }
+    
     /* Only show hamburger on very small screens, optimize space */
     @media (max-width: 400px) {
         .tui-nav ul li:not(.tui-sidenav-button) {
@@ -373,5 +397,14 @@
         .tui-sidenav-button {
             font-size: 1.3em;
         }
+    }
+    
+    /* Further optimize contact table for very narrow screens */
+    .contact-table td {
+        padding: 5px 2px;
+    }
+    
+    .contact-table td:first-child {
+        width: 25%;
     }
 }

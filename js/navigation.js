@@ -115,16 +115,47 @@ function handleEmailClick(event) {
     }
 }
 
+// Email function for side menu that resets to "Email" text
+function handleSideMenuEmail(event) {
+    event.preventDefault();
+    const email = "wmontes@gmail.com";
+    const link = event.target.closest('.sidemenu-email');
+    
+    // If the email is already displayed (link text contains the email)
+    if (link.textContent.includes(email)) {
+        // Copy to clipboard
+        navigator.clipboard.writeText(email).then(() => {
+            // Change text to "Copied"
+            link.innerHTML = '<span class="red-168-text">E</span>mail <span class="green-168-text">(Copied!)</span>';
+            
+            // After 3 seconds, revert back to just showing "Email"
+            setTimeout(() => {
+                link.innerHTML = '<span class="red-168-text">E</span>mail';
+            }, 3000);
+        }).catch(err => {
+            console.error('Could not copy text: ', err);
+        });
+    } else {
+        // First click - reveal email
+        link.innerHTML = '<span class="red-168-text">E</span>mail: ' + email;
+        
+        // After 3 seconds, revert back to just showing "Email"
+        setTimeout(() => {
+            link.innerHTML = '<span class="red-168-text">E</span>mail';
+        }, 5000);
+    }
+}
+
 // Initialize all navigation functionality
 function initNavigation() {
     initTabNavigation();
     initAnchorLinks();
     setupSidenavClickOutside();
-    // setupEmailObfuscation(); // Remove this line
 }
 
-// Add the function to the global scope so it can be called from HTML onclick
+// Add the functions to the global scope so they can be called from HTML onclick
 window.handleEmailClick = handleEmailClick;
+window.handleSideMenuEmail = handleSideMenuEmail;
 
 // Run when DOM is loaded
 document.addEventListener('DOMContentLoaded', initNavigation);

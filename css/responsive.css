@@ -1,0 +1,377 @@
+/* Responsive styles for the terminal portfolio */
+
+/* Extra large screens */
+@media screen and (min-width: 1600px) {
+    .section-content {
+        max-width: 1400px;
+    }
+    
+    #projects .project-card {
+        width: 70%;
+    }
+    
+    .skill-bar .tui-progress-bar {
+        max-width: 600px;
+    }
+}
+
+/* Large screens */
+@media screen and (min-width: 1200px) and (max-width: 1599px) {
+    .section-content {
+        max-width: 1100px;
+    }
+    
+    #projects .project-card {
+        width: 75%;
+    }
+    
+    .skill-bar .tui-progress-bar {
+        max-width: 500px;
+    }
+}
+
+/* Medium screens */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .section-content {
+        max-width: 900px;
+    }
+    
+    #projects .project-card {
+        width: 85%;
+    }
+    
+    .skill-bar .tui-progress-bar {
+        max-width: 400px;
+    }
+}
+
+/* Small screens and tablets */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .section-content {
+        padding: 0 20px;
+    }
+    
+    #projects .project-card {
+        width: 90%;
+    }
+    
+    .skill-bar {
+        flex-wrap: wrap;
+    }
+    
+    .skill-bar span {
+        min-width: 150px;
+    }
+    
+    .tui-tab {
+        padding: 5px 8px;
+    }
+}
+
+/* Tablets and large phones */
+@media screen and (min-width: 576px) and (max-width: 767px) {
+    html, body {
+        overflow: auto;
+    }
+    
+    .fullscreen-container {
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .tui-window.full-width {
+        height: auto;
+        min-height: calc(100vh - 80px);
+        margin-bottom: 40px;
+    }
+    
+    .tui-fieldset {
+        height: auto;
+    }
+    
+    .content-area {
+        height: auto;
+        max-height: none;
+    }
+    
+    .skill-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .skill-bar span {
+        margin-bottom: 5px;
+    }
+    
+    .skill-bar .tui-progress-bar {
+        width: 100%;
+        margin-left: 0 !important;
+    }
+    
+    #projects .project-card {
+        width: 100%;
+    }
+    
+    #projects .tui-panel-content {
+        min-height: auto;
+        padding: 15px;
+    }
+    
+    /* Two-row top navigation - 80s style */
+    .tui-nav {
+        flex-wrap: nowrap; /* Prevent wrapping to two lines */
+        height: 30px; /* Fixed height */
+        padding: 0 5px;
+        justify-content: space-between;
+    }
+    
+    .tui-nav ul {
+        flex-wrap: nowrap; /* Keep menu items on one line */
+        justify-content: center;
+        order: 2;
+        flex: 0 1 auto; /* Allow shrinking but not growing */
+        overflow-x: auto; /* Allow horizontal scrolling if needed */
+        scrollbar-width: none; /* Hide scrollbar in Firefox */
+        -ms-overflow-style: none; /* Hide scrollbar in IE/Edge */
+    }
+    
+    .tui-nav ul::-webkit-scrollbar {
+        display: none; /* Hide scrollbar in Chrome/Safari */
+    }
+    
+    .tui-datetime {
+        margin-left: 0;
+        order: 3;
+        flex: 0 0 auto; /* Prevent shrinking */
+    }
+    
+    .tui-sidenav-button {
+        order: 1;
+        margin-right: 5px !important;
+        flex: 0 0 auto; /* Prevent shrinking */
+    }
+    
+    /* In case we need to hide some menu items at this breakpoint */
+    .tui-nav ul li:not(.tui-sidenav-button) {
+        /* Only display first two menu items plus hamburger */
+        display: inline-block;
+    }
+    
+    /* Status bar adjustments */
+    .tui-statusbar ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    
+    .tui-statusbar-divider {
+        display: none;
+    }
+    
+    /* Simplified navbar */
+    .tui-nav {
+        flex-wrap: nowrap;
+        height: 30px;
+        padding: 0 10px;
+    }
+    
+    .tui-datetime {
+        font-size: 0.95em;
+    }
+    
+    .tui-sidenav-button {
+        font-size: 1.2em;
+    }
+}
+
+/* Small phones */
+@media screen and (max-width: 575px) {
+    html, body {
+        overflow: auto;
+    }
+    
+    .fullscreen-container {
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+    }
+    
+    .tui-window.full-width {
+        height: auto;
+        min-height: calc(100vh - 80px);
+        margin-bottom: 40px;
+    }
+    
+    .tui-fieldset {
+        height: auto;
+        padding: 5px;
+    }
+    
+    .content-area {
+        height: auto;
+        padding: 5px;
+    }
+    
+    .section-content {
+        padding: 0 10px;
+    }
+    
+    /* Optimize skill bars for small screens */
+    .skill-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 15px;
+    }
+    
+    .skill-bar span {
+        margin-bottom: 5px;
+        margin-right: 0;
+    }
+    
+    .skill-bar .tui-progress-bar {
+        width: 100%;
+        margin-left: 0 !important;
+    }
+    
+    /* Project cards on small screens */
+    #projects .project-card {
+        width: 100%;
+    }
+    
+    #projects .tui-panel-content {
+        min-height: 0;
+        padding: 10px;
+    }
+    
+    /* Tab navigation */
+    .tui-tabs ul {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .tui-tabs ul li {
+        flex: 1 1 auto;
+    }
+    
+    .tui-tab {
+        padding: 5px 2px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+    
+    /* Top navigation */
+    .tui-nav {
+        flex-wrap: nowrap; /* Prevent wrapping to two lines */
+        height: 30px;
+        min-height: 24px;
+        padding: 0 5px;
+        justify-content: space-between;
+    }
+    
+    .tui-nav ul {
+        flex: 0 1 auto; /* Allow shrinking but not growing */
+        justify-content: center;
+        width: auto; /* Not full width */
+        order: 2;
+    }
+    
+    .tui-datetime {
+        margin-left: 0 !important;
+        margin-right: 5px;
+        font-size: 0.9em;
+        order: 3;
+        flex: 0 0 auto; /* Prevent shrinking */
+    }
+    
+    .tui-sidenav-button {
+        margin-left: 5px !important;
+        margin-right: 5px !important;
+        order: 1;
+        flex: 0 0 auto; /* Prevent shrinking */
+    }
+    
+    /* Only show hamburger on very small screens, optimize space */
+    @media (max-width: 400px) {
+        .tui-nav ul li:not(.tui-sidenav-button) {
+            display: none;
+        }
+        
+        .tui-sidenav-button {
+            display: inline-block !important;
+        }
+    }
+    
+    /* Hide redundant menu items on very small screens */
+    @media (max-width: 400px) {
+        .tui-nav ul li:not(.tui-sidenav-button) {
+            display: none;
+        }
+        
+        .tui-sidenav-button {
+            display: inline-block !important;
+        }
+        
+        .tui-nav {
+            justify-content: space-between;
+            padding: 2px 5px;
+        }
+        
+        .tui-datetime {
+            text-align: right;
+        }
+    }
+    
+    /* Status bar simplification */
+    .tui-statusbar {
+        height: auto;
+    }
+    
+    .tui-statusbar ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 2px 0;
+    }
+    
+    .tui-statusbar ul li {
+        font-size: 0.85em;
+        margin: 3px;
+        padding: 3px;
+    }
+    
+    .tui-statusbar-divider {
+        display: none;
+    }
+    
+    /* Better touch targets */
+    .tui-button, .tui-sidenav ul li, .tui-statusbar ul li {
+        padding: 8px 12px;
+    }
+    
+    /* Simplified navbar for small screens */
+    .tui-nav {
+        flex-wrap: nowrap;
+        height: 30px;
+        min-height: 24px;
+        padding: 0 8px;
+    }
+    
+    .tui-datetime {
+        font-size: 0.9em;
+    }
+    
+    .tui-sidenav-button {
+        font-size: 1.2em;
+    }
+    
+    /* Very small screens - enhance touch targets */
+    @media (max-width: 340px) {
+        .tui-nav {
+            height: 35px;
+        }
+        
+        .tui-sidenav-button {
+            font-size: 1.3em;
+        }
+    }
+}

@@ -7,62 +7,20 @@
     <title>Wagner Montes | Portfolio</title>
     <!-- TUI CSS Framework -->
     <link rel="stylesheet" href="tuicss.min.css">
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="css/styles.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 
 <body>
     <div class="fullscreen-container tui-bg-blue-black">
-        <!-- Navbar -->
+        <!-- Navbar - Simplified with only hamburger and clock -->
         <nav class="tui-nav absolute">
-            <span class="tui-datetime" data-format="h:m:s a"></span>
             <ul>
                 <li class="tui-sidenav-button red-168-text">≡</li>
-                <li class="tui-dropdown">
-                    <span class="red-168-text">N</span>avigate
-                    <div class="tui-dropdown-content">
-                        <ul>
-                            <li>
-                                <a href="#about">
-                                    <span class="red-168-text">A</span>bout
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#skills">
-                                    <span class="red-168-text">S</span>kills
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#projects">
-                                    <span class="red-168-text">E</span>xperience
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#contact">
-                                    <span class="red-168-text">C</span>ontact
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="tui-dropdown">
-                    <span class="red-168-text">S</span>ocial
-                    <div class="tui-dropdown-content">
-                        <ul>
-                            <li>
-                                <a href="https://github.com/" target="_blank">
-                                    <span class="red-168-text">G</span>itHub
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://linkedin.com/in/wagnermontes" target="_blank">
-                                    <span class="red-168-text">L</span>inkedIn
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                <!-- Menu items removed -->
             </ul>
+            <span class="tui-datetime" data-format="h:m:s a"></span>
         </nav>
 
         <!-- Sidenav -->
@@ -338,112 +296,19 @@
         <!-- Status bar -->
         <div class="tui-statusbar absolute">
             <ul>
-                <li><a href="#about"><span class="red-168-text">F1</span> About</a></li>
-                <li><a href="#skills"><span class="red-168-text">F2</span> Skills</a></li>
-                <li><a href="#projects"><span class="red-168-text">F3</span> Experience</a></li>
-                <li><a href="#contact"><span class="red-168-text">F4</span> Contact</a></li>
-                <span class="tui-statusbar-divider"></span>
-                <li><a href="#" class="email-link" onclick="revealEmail(event)"><span class="red-168-text">F10</span> Email Me</a></li>
+                <li><a href="https://www.linkedin.com/in/wsmontes/" target="_blank"><span class="red-168-text">F1</span> LinkedIn</a></li>
+                <li><a href="https://github.com/wsmontes" target="_blank"><span class="red-168-text">F2</span> GitHub</a></li>
+                <li><a href="https://www.imdb.com/name/nm9506783/" target="_blank"><span class="red-168-text">F3</span> IMDB</a></li>
+                <li><a href="#" class="email-link" onclick="handleEmailClick(event)"><span class="red-168-text">F4</span> Email</a></li>
             </ul>
         </div>
+
     </div>
 
-    <!-- TUI JavaScript Framework -->
+    <!-- JavaScript -->
     <script src="tuicss.min.js"></script>
-    <!-- Custom Scripts -->
-    <script src="js/main.js"></script>
-    <script>
-        // Enable tab navigation
-        document.querySelectorAll('.tui-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                // Hide all tab content
-                document.querySelectorAll('.tui-tab-content').forEach(content => {
-                    content.style.display = 'none';
-                });
-                
-                // Remove active class from all tabs
-                document.querySelectorAll('.tui-tab').forEach(tab => {
-                    tab.classList.remove('active');
-                });
-                
-                // Show the selected tab content and mark tab as active
-                const contentId = this.getAttribute('data-tab-content');
-                document.getElementById(contentId).style.display = 'block';
-                this.classList.add('active');
-            });
-        });
-        
-        // Show initial tab
-        document.getElementById('about').style.display = 'block';
-        
-        // Handle anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href').substring(1);
-                
-                // Trigger click on corresponding tab
-                document.querySelector(`.tui-tab[data-tab-content="${targetId}"]`).click();
-                
-                // For mobile: Close sidenav when a menu item is clicked
-                if (window.innerWidth <= 768) {
-                    const sidenav = document.querySelector('.tui-sidenav');
-                    if (sidenav && sidenav.classList.contains('active')) {
-                        sidenav.classList.remove('active');
-                    }
-                }
-            });
-        });
-        
-        // Adjust height for different screen sizes
-        function handleResize() {
-            const windowHeight = window.innerHeight;
-            const contentArea = document.querySelector('.content-area');
-            
-            if (window.innerWidth <= 480) {
-                contentArea.style.maxHeight = `${windowHeight - 150}px`;
-            } else if (window.innerWidth <= 768) {
-                contentArea.style.maxHeight = `${windowHeight - 120}px`;
-            } else {
-                contentArea.style.height = `${windowHeight - 120}px`;
-            }
-        }
-        
-        // Email obfuscation function
-        function revealEmail(event) {
-            event.preventDefault();
-            const user = "wmontes";
-            const domain = "gmail.com";
-            const email = user + "@" + domain;
-            
-            // Update link href and text
-            event.target.closest('a').href = "mailto:" + email;
-            
-            // If the clicked element is the link itself (not a child element)
-            if (event.target.classList.contains('email-link')) {
-                event.target.textContent = email;
-            } 
-            // If we clicked on a child element inside the email link
-            else if (event.target.closest('.email-link')) {
-                const linkElement = event.target.closest('.email-link');
-                // Preserve any HTML inside the link (like styled letters)
-                if (linkElement.querySelector('span')) {
-                    const spanElement = linkElement.querySelector('span');
-                    const spanText = spanElement.textContent;
-                    linkElement.innerHTML = `<span class="${spanElement.className}">${spanText}</span>mail: ${email}`;
-                } else {
-                    linkElement.textContent = email;
-                }
-            }
-            
-            return true;
-        }
-        
-        // Initialize
-        window.addEventListener('load', handleResize);
-        window.addEventListener('resize', handleResize);
-    </script>
+    <script src="js/navigation.js"></script>
+    <script src="js/terminal-ui.js"></script>
 </body>
 
 </html>

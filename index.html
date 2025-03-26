@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en" class="no-tui-scroll">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wagner Montes | Portfolio</title>
+    <script src="../dist/tuicss.min.js"></script>
+    <link rel="stylesheet" href="../dist/tuicss.min.css">
+    <style>
+        /* Full screen layout styles */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .fullscreen-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .section-content {
+            margin-bottom: 20px;
+        }
+        
+        .skill-bar {
+            margin-bottom: 10px;
+        }
+        
+        .project-card {
+            margin-bottom: 15px;
+        }
+        
+        .content-area {
+            height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        
+        .tui-window.full-width {
+            height: calc(100% - 80px);
+            margin-top: 40px;
+        }
+        
+        .tui-fieldset {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tui-tabs {
+            flex-shrink: 0;
+        }
+        
+        /* Responsive styles for mobile */
+        @media screen and (max-width: 768px) {
+            .fullscreen-container {
+                width: 100% !important;
+                height: 100vh !important;
+                overflow: auto;
+                border: none !important;
+            }
+            
+            .tui-window.full-width {
+                height: auto;
+                min-height: calc(100vh - 80px);
+            }
+            
+            .tui-window.full-width .tui-fieldset {
+                padding: 10px;
+                height: auto;
+            }
+            
+            .content-area {
+                height: auto;
+                max-height: calc(100vh - 150px);
+            }
+            
+            /* Adjust skill bars for mobile */
+            .skill-bar {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 15px;
+            }
+            
+            .skill-bar .tui-progress-bar {
+                margin-left: 0 !important;
+                margin-top: 5px;
+                width: 100% !important;
+                max-width: 100%;
+            }
+            
+            /* Make charts responsive */
+            .tui-chart-horizontal {
+                width: 100% !important;
+                max-width: 100%;
+            }
+            
+            /* Adjust form inputs for mobile */
+            .tui-input, textarea.tui-input {
+                width: 100% !important;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+            
+            /* Improve touch targets on mobile */
+            .tui-button {
+                padding: 8px 12px;
+                margin-bottom: 8px;
+                margin-right: 8px;
+            }
+            
+            /* Hide certain elements on mobile */
+            .tui-shortcut {
+                display: none;
+            }
+            
+            /* Improve sidenav for mobile */
+            .tui-sidenav.active {
+                width: 80%;
+                max-width: 250px;
+                z-index: 1000;
+            }
+            
+            /* Status bar adjustments */
+            .tui-statusbar ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+            
+            .tui-statusbar ul li {
+                margin: 5px;
+            }
+            
+            .tui-statusbar-divider {
+                display: none;
+            }
+            
+            /* Tab adjustments */
+            .tui-tabs ul {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            
+            .tui-tabs ul li {
+                flex: 1 1 auto;
+                text-align: center;
+            }
+            
+            /* Project cards adjustments */
+            .project-card .tui-panel-content {
+                padding: 10px;
+            }
+        }
+        
+        /* Equal width for experience company boxes */
+        #projects .project-card {
+            width: 80%;
+            box-sizing: border-box;
+        }
+        
+        #projects .section-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        /* Ensure company panels have equal height content areas */
+        #projects .tui-panel-content {
+            min-height: 180px;
+        }
+        
+        /* Responsive adjustments for experience section */
+        @media screen and (max-width: 768px) {
+            #projects .tui-panel-content {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fullscreen-container tui-bg-blue-black">
+        <!-- Navbar -->
+        <nav class="tui-nav absolute">
+            <span class="tui-datetime" data-format="h:m:s a"></span>
+            <ul>
+                <li class="tui-sidenav-button red-168-text">≡</li>
+                <li class="tui-dropdown">
+                    <span class="red-168-text">N</span>avigate
+                    <div class="tui-dropdown-content">
+                        <ul>
+                            <li>
+                                <a href="#about">
+                                    <span class="red-168-text">A</span>bout
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#skills">
+                                    <span class="red-168-text">S</span>kills
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#projects">
+                                    <span class="red-168-text">E</span>xperience
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#contact">
+                                    <span class="red-168-text">C</span>ontact
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="tui-dropdown">
+                    <span class="red-168-text">S</span>ocial
+                    <div class="tui-dropdown-content">
+                        <ul>
+                            <li>
+                                <a href="https://github.com/" target="_blank">
+                                    <span class="red-168-text">G</span>itHub
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://linkedin.com/in/wagnermontes" target="_blank">
+                                    <span class="red-168-text">L</span>inkedIn
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Sidenav -->
+        <nav class="tui-sidenav absolute">
+            <ul>
+                <li>
+                    <a href="#about">
+                        <span class="red-168-text">A</span>bout
+                        <span class="tui-shortcut">ctrl+a</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#skills">
+                        <span class="red-168-text">S</span>kills
+                        <span class="tui-shortcut">ctrl+s</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#projects">
+                        <span class="red-168-text">E</span>xperience
+                        <span class="tui-shortcut">ctrl+e</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#contact">
+                        <span class="red-168-text">C</span>ontact
+                        <span class="tui-shortcut">ctrl+c</span>
+                    </a>
+                </li>
+                <div class="tui-black-divider"></div>
+                <li>
+                    <a href="https://github.com/" target="_blank">
+                        <span class="red-168-text">G</span>itHub
+                    </a>
+                </li>
+                <li>
+                    <a href="https://linkedin.com/in/wagnermontes" target="_blank">
+                        <span class="red-168-text">L</span>inkedIn
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:wagner.montes@example.com">
+                        <span class="red-168-text">E</span>mail
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main window with tabs -->
+        <div class="tui-window full-width tui-no-shadow">
+            <fieldset class="tui-fieldset">
+                <legend class="center">WAGNER_MONTES.SYS</legend>
+                <span class="tui-fieldset-button"><span class="green-255-text">↕</span></span>
+                <span class="tui-fieldset-button left"><span class="green-255-text">■</span></span>
+                
+                <div class="tui-tabs">
+                    <ul>
+                        <li><a class="tui-tab active" data-tab-content="about">About</a></li>
+                        <li><a class="tui-tab" data-tab-content="skills">Skills</a></li>
+                        <li><a class="tui-tab" data-tab-content="projects">Experience</a></li>
+                        <li><a class="tui-tab" data-tab-content="contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="content-area">
+                    <!-- About Section -->
+                    <div class="tui-tab-content" id="about">
+                        <div class="section-content">
+                            <h3 class="cyan-168-text">PROFESSIONAL PROFILE</h3>
+                            <div class="tui-divider"></div>
+                            <br>
+                            <div class="green-168-text">Wagner Montes</div>
+                            <div class="white-255-text">Business Analyst || Product Developer || Solution Architect</div>
+                            <br>
+                            <p>I am a hybrid IT professional, with solid business analysis experience, product development background and coding skills. Comfortable working with complex business requirements as well as leading development directly. Hands-on experience with generative models, extensive technical background and huge interest in conversational solutions.</p>
+                            <br>
+                            <p>I specialize in digital transformation, business architecture, change management, and technical roles involving data analysis, automation, data transformation, and product development. My journey has seen me work in diverse sectors such as government, telecommunications, and healthcare.</p>
+                            <br>
+                            <div class="yellow-168-text">$ cat education.txt</div>
+                            <pre class="white-255-text">
+• The University of British Columbia - Key Capabilities in Data Science (2021-2022)
+• USP - Universidade de São Paulo - Master's Degree, Computer Software and Media Applications (2011-2014)
+• USP - Universidade de São Paulo - Communication, Mass Communication/Media Studies (2004-2010)
+                            </pre>
+                            <br>
+                            <div class="yellow-168-text">$ cat certifications.txt</div>
+                            <pre class="white-255-text">
+• Microsoft Certified: Azure AI Fundamentals
+• Certified DataWalk Technical Professional
+• Certified Sales Associate
+                            </pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Skills Section -->
+                    <div class="tui-tab-content" id="skills">
+                        <div class="section-content">
+                            <h3 class="cyan-168-text">TECHNICAL CAPABILITIES</h3>
+                            <div class="tui-divider"></div>
+                            <br>
+                            <div class="skill-bar">
+                                <span class="yellow-168-text">Business Analysis</span>
+                                <div class="tui-progress-bar inline-block valign-middle" style="width: 300px; margin-left: 20px;">
+                                    <span class="tui-progress-label black-text">95%</span>
+                                    <span class="tui-progress green-168" style="width: 95%"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-bar">
+                                <span class="yellow-168-text">Artificial Intelligence</span>
+                                <div class="tui-progress-bar inline-block valign-middle" style="width: 300px; margin-left: 20px;">
+                                    <span class="tui-progress-label black-text">90%</span>
+                                    <span class="tui-progress green-168" style="width: 90%"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-bar">
+                                <span class="yellow-168-text">Data Science</span>
+                                <div class="tui-progress-bar inline-block valign-middle" style="width: 300px; margin-left: 20px;">
+                                    <span class="tui-progress-label black-text">85%</span>
+                                    <span class="tui-progress green-168" style="width: 85%"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-bar">
+                                <span class="yellow-168-text">Product Development</span>
+                                <div class="tui-progress-bar inline-block valign-middle" style="width: 300px; margin-left: 20px;">
+                                    <span class="tui-progress-label black-text">90%</span>
+                                    <span class="tui-progress green-168" style="width: 90%"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-bar">
+                                <span class="yellow-168-text">Process Modeling</span>
+                                <div class="tui-progress-bar inline-block valign-middle" style="width: 300px; margin-left: 20px;">
+                                    <span class="tui-progress-label black-text">90%</span>
+                                    <span class="tui-progress green-168" style="width: 90%"></span>
+                                </div>
+                            </div>
+                            
+                            <br>
+                            <h4 class="cyan-168-text">ADDITIONAL EXPERTISE</h4>
+                            <div class="tui-divider"></div>
+                            <br>
+                            <div class="skill-bar">
+                                <span class="yellow-168-text">Agile Methodologies</span>
+                                <div class="tui-progress-bar inline-block valign-middle" style="width: 300px; margin-left: 20px;">
+                                    <span class="tui-progress-label black-text">92%</span>
+                                    <span class="tui-progress green-168" style="width: 92%"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-bar">
+                                <span class="yellow-168-text">Change Management</span>
+                                <div class="tui-progress-bar inline-block valign-middle" style="width: 300px; margin-left: 20px;">
+                                    <span class="tui-progress-label black-text">90%</span>
+                                    <span class="tui-progress red-168" style="width: 90%"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-bar">
+                                <span class="yellow-168-text">Technical Writing</span>
+                                <div class="tui-progress-bar inline-block valign-middle" style="width: 300px; margin-left: 20px;">
+                                    <span class="tui-progress-label black-text">88%</span>
+                                    <span class="tui-progress blue-168" style="width: 88%"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-bar">
+                                <span class="yellow-168-text">Workshop Facilitation</span>
+                                <div class="tui-progress-bar inline-block valign-middle" style="width: 300px; margin-left: 20px;">
+                                    <span class="tui-progress-label black-text">85%</span>
+                                    <span class="tui-progress yellow-168" style="width: 85%"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Projects Section (now Experience) -->
+                    <div class="tui-tab-content" id="projects">
+                        <div class="section-content">
+                            <h3 class="cyan-168-text">PROFESSIONAL EXPERIENCE</h3>
+                            <div class="tui-divider"></div>
+                            <br>
+                            <div class="project-card tui-panel white-168">
+                                <div class="tui-panel-header">
+                                    <span class="tui-panel-title blue-255-text">ICBC (Insurance Corporation of British Columbia)</span>
+                                </div>
+                                <div class="tui-panel-content black-255-text">
+                                    <p>Business System Analyst working on digital transformation initiatives, enhancing insurance systems and processes.</p>
+                                    <br>
+                                    <div><span class="red-168-text">Position:</span> Business System Analyst</div>
+                                    <div><span class="red-168-text">Period:</span> Jan 2025 - Present</div>
+                                    <div><span class="red-168-text">Location:</span> Victoria, British Columbia, Canada</div>
+                                </div>
+                            </div>
+                            
+                            <div class="project-card tui-panel white-168">
+                                <div class="tui-panel-header">
+                                    <span class="tui-panel-title blue-255-text">Lotier International</span>
+                                </div>
+                                <div class="tui-panel-content black-255-text">
+                                    <p>Consultant for AI solutions, working with data modeling, process modeling, and implementing large language models for business applications.</p>
+                                    <br>
+                                    <div><span class="red-168-text">Position:</span> Consultant - AI Solution</div>
+                                    <div><span class="red-168-text">Period:</span> May 2021 - Present</div>
+                                    <div><span class="red-168-text">Key Skills:</span> Data Modeling, AI, LLM, Prompt Engineering, NLP</div>
+                                </div>
+                            </div>
+                            
+                            <div class="project-card tui-panel white-168">
+                                <div class="tui-panel-header">
+                                    <span class="tui-panel-title blue-255-text">CGI</span>
+                                </div>
+                                <div class="tui-panel-content black-255-text">
+                                    <p>Senior Consultant and Consultant roles focused on healthcare IT, data analysis, and business architecture for government clients.</p>
+                                    <br>
+                                    <div><span class="red-168-text">Position:</span> Consultant to Senior Consultant</div>
+                                    <div><span class="red-168-text">Period:</span> Apr 2022 - Jan 2025</div>
+                                    <div><span class="red-168-text">Key Skills:</span> Healthcare IT, Business Architecture, Workshop Facilitation</div>
+                                </div>
+                            </div>
+                            
+                            <div class="project-card tui-panel white-168">
+                                <div class="tui-panel-header">
+                                    <span class="tui-panel-title blue-255-text">PARC Systems Inc</span>
+                                </div>
+                                <div class="tui-panel-content black-255-text">
+                                    <p>Technical Business Analyst working with data analysis, process modeling, and healthcare information technology.</p>
+                                    <br>
+                                    <div><span class="red-168-text">Position:</span> Technical Business Analyst</div>
+                                    <div><span class="red-168-text">Period:</span> Nov 2019 - Mar 2022</div>
+                                    <div><span class="red-168-text">Key Skills:</span> RPA, Process Automation, Data Analysis</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Section -->
+                    <div class="tui-tab-content" id="contact">
+                        <div class="section-content">
+                            <h3 class="cyan-168-text">CONTACT INFORMATION</h3>
+                            <div class="tui-divider"></div>
+                            <br>
+                            <p>Feel free to reach out through any of the following channels:</p>
+                            <br>
+                            <table class="tui-table" style="width: 100%">
+                                <tbody>
+                                    <tr>
+                                        <td class="yellow-168-text">Email:</td>
+                                        <td>wagner.montes@example.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="yellow-168-text">LinkedIn:</td>
+                                        <td>linkedin.com/in/wagnermontes</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="yellow-168-text">Location:</td>
+                                        <td>Victoria, British Columbia, Canada</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br>
+                            <h4 class="cyan-168-text">SEND MESSAGE</h4>
+                            <div class="tui-divider"></div>
+                            <br>
+                            <div>Name.......: <input class="tui-input" style="width: 300px" type="text" /></div>
+                            <br>
+                            <div>Email......: <input class="tui-input" style="width: 300px" type="email" /></div>
+                            <br>
+                            <div>Subject....: <input class="tui-input" style="width: 300px" type="text" /></div>
+                            <br>
+                            <div>Message....: </div>
+                            <textarea class="tui-input" style="width: 500px; height: 100px;"></textarea>
+                            <br><br>
+                            <button class="tui-button">Send Message</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <!-- Status bar -->
+        <div class="tui-statusbar absolute">
+            <ul>
+                <li><a href="#about"><span class="red-168-text">F1</span> About</a></li>
+                <li><a href="#skills"><span class="red-168-text">F2</span> Skills</a></li>
+                <li><a href="#projects"><span class="red-168-text">F3</span> Experience</a></li>
+                <li><a href="#contact"><span class="red-168-text">F4</span> Contact</a></li>
+                <span class="tui-statusbar-divider"></span>
+                <li><a href="mailto:wagner.montes@example.com"><span class="red-168-text">F10</span> Email Me</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Enable tab navigation
+        document.querySelectorAll('.tui-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Hide all tab content
+                document.querySelectorAll('.tui-tab-content').forEach(content => {
+                    content.style.display = 'none';
+                });
+                
+                // Remove active class from all tabs
+                document.querySelectorAll('.tui-tab').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                
+                // Show the selected tab content and mark tab as active
+                const contentId = this.getAttribute('data-tab-content');
+                document.getElementById(contentId).style.display = 'block';
+                this.classList.add('active');
+            });
+        });
+        
+        // Show initial tab
+        document.getElementById('about').style.display = 'block';
+        
+        // Handle anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href').substring(1);
+                
+                // Trigger click on corresponding tab
+                document.querySelector(`.tui-tab[data-tab-content="${targetId}"]`).click();
+                
+                // For mobile: Close sidenav when a menu item is clicked
+                if (window.innerWidth <= 768) {
+                    const sidenav = document.querySelector('.tui-sidenav');
+                    if (sidenav && sidenav.classList.contains('active')) {
+                        sidenav.classList.remove('active');
+                    }
+                }
+            });
+        });
+        
+        // Adjust height for different screen sizes
+        function handleResize() {
+            const windowHeight = window.innerHeight;
+            const contentArea = document.querySelector('.content-area');
+            
+            if (window.innerWidth <= 480) {
+                contentArea.style.maxHeight = `${windowHeight - 150}px`;
+            } else if (window.innerWidth <= 768) {
+                contentArea.style.maxHeight = `${windowHeight - 120}px`;
+            } else {
+                contentArea.style.height = `${windowHeight - 120}px`;
+            }
+        }
+        
+        // Initialize
+        window.addEventListener('load', handleResize);
+        window.addEventListener('resize', handleResize);
+    </script>
+</body>
+
+</html>

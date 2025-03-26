@@ -146,11 +146,35 @@ function handleSideMenuEmail(event) {
     }
 }
 
+// Handle F10 dropdown behavior for touch devices
+function initF10TouchBehavior() {
+    const sourceCodeDropdown = document.querySelector('.source-code-dropdown .tui-dropdown > a');
+    
+    if (sourceCodeDropdown) {
+        sourceCodeDropdown.addEventListener('click', function(event) {
+            const dropdownContent = this.nextElementSibling;
+            const isOpen = dropdownContent.style.display === 'block';
+            const isMobile = window.innerWidth <= 991;
+            
+            // If on mobile and dropdown is already open, navigate to the href
+            if (isMobile && isOpen) {
+                window.location.href = this.getAttribute('href');
+                event.preventDefault(); // Prevent default just for this line execution
+                return;
+            }
+            
+            // If it's the first click, let the default dropdown behavior happen
+            // The TUI CSS will handle showing the dropdown
+        });
+    }
+}
+
 // Initialize all navigation functionality
 function initNavigation() {
     initTabNavigation();
     initAnchorLinks();
     setupSidenavClickOutside();
+    initF10TouchBehavior(); // Add this line to initialize the F10 touch behavior
 }
 
 // Add the functions to the global scope so they can be called from HTML onclick

@@ -153,3 +153,29 @@ pre, code {
 .tui-nav ul li {
     white-space: nowrap; /* Prevent menu item text from wrapping */
 }
+
+/* Source code dropdown */
+.source-code-dropdown {
+    position: relative;
+}
+
+.source-code-dropdown .tui-dropdown-content {
+    min-width: 240px;
+    right: 0;
+    left: auto;
+}
+
+/* Modified status bar to support right-aligned menu */
+.tui-statusbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tui-statusbar ul {
+    display: flex;
+    align-items: center;
+}
+
+.tui-statusbar .right-align-menu {
+    margin-right: 10px;
+}

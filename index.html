@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wagner Montes | Portfolio</title>
-    <script src="../dist/tuicss.min.js"></script>
-    <link rel="stylesheet" href="../dist/tuicss.min.css">
+    <script src="tuicss.min.js"></script>
+    <link rel="stylesheet" href="tuicss.min.css">
     <style>
         /* Full screen layout styles */
         html, body {
@@ -277,7 +277,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="mailto:wagner.montes@example.com">
+                    <a href="#" class="email-link" onclick="revealEmail(event)">
                         <span class="red-168-text">E</span>mail
                     </a>
                 </li>
@@ -486,7 +486,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="yellow-168-text">Email:</td>
-                                        <td>wagner.montes@example.com</td>
+                                        <td><a href="#" class="email-link" onclick="revealEmail(event)">Click to reveal email</a></td>
                                     </tr>
                                     <tr>
                                         <td class="yellow-168-text">LinkedIn:</td>
@@ -499,19 +499,9 @@
                                 </tbody>
                             </table>
                             <br>
-                            <h4 class="cyan-168-text">SEND MESSAGE</h4>
-                            <div class="tui-divider"></div>
-                            <br>
-                            <div>Name.......: <input class="tui-input" style="width: 300px" type="text" /></div>
-                            <br>
-                            <div>Email......: <input class="tui-input" style="width: 300px" type="email" /></div>
-                            <br>
-                            <div>Subject....: <input class="tui-input" style="width: 300px" type="text" /></div>
-                            <br>
-                            <div>Message....: </div>
-                            <textarea class="tui-input" style="width: 500px; height: 100px;"></textarea>
-                            <br><br>
-                            <button class="tui-button">Send Message</button>
+                            <div class="cyan-168-text">
+                                <p>Thank you for visiting my portfolio! I look forward to connecting with you.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -526,7 +516,7 @@
                 <li><a href="#projects"><span class="red-168-text">F3</span> Experience</a></li>
                 <li><a href="#contact"><span class="red-168-text">F4</span> Contact</a></li>
                 <span class="tui-statusbar-divider"></span>
-                <li><a href="mailto:wagner.montes@example.com"><span class="red-168-text">F10</span> Email Me</a></li>
+                <li><a href="#" class="email-link" onclick="revealEmail(event)"><span class="red-168-text">F10</span> Email Me</a></li>
             </ul>
         </div>
     </div>
@@ -587,6 +577,36 @@
             } else {
                 contentArea.style.height = `${windowHeight - 120}px`;
             }
+        }
+        
+        // Email obfuscation function
+        function revealEmail(event) {
+            event.preventDefault();
+            const user = "wmontes";
+            const domain = "gmail.com";
+            const email = user + "@" + domain;
+            
+            // Update link href and text
+            event.target.closest('a').href = "mailto:" + email;
+            
+            // If the clicked element is the link itself (not a child element)
+            if (event.target.classList.contains('email-link')) {
+                event.target.textContent = email;
+            } 
+            // If we clicked on a child element inside the email link
+            else if (event.target.closest('.email-link')) {
+                const linkElement = event.target.closest('.email-link');
+                // Preserve any HTML inside the link (like styled letters)
+                if (linkElement.querySelector('span')) {
+                    const spanElement = linkElement.querySelector('span');
+                    const spanText = spanElement.textContent;
+                    linkElement.innerHTML = `<span class="${spanElement.className}">${spanText}</span>mail: ${email}`;
+                } else {
+                    linkElement.textContent = email;
+                }
+            }
+            
+            return true;
         }
         
         // Initialize

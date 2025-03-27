@@ -373,7 +373,16 @@ class ContentManager {
      */
     parseInlineFormatting(text) {
         // Convert markdown-style links: [text](url)
-        text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+        // Add target="_blank" and rel="noopener noreferrer" for external links
+        text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
+            // Check if it's an external link (starts with http:// or https:// or //)
+            const isExternal = /^(https?:\/\/|\/\/)/.test(url);
+            
+            // Add target and rel attributes for external links
+            const externalAttrs = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
+            
+            return `<a href="${url}"${externalAttrs}>${linkText}</a>`;
+        });
         
         // Convert bold: **text** or __text__
         text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');

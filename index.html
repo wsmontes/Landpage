@@ -97,6 +97,47 @@
         .tui-sidenav {
             width: 250px;
         }
+        /* Add mouse-over green background for links that don't already have custom hover styles.
+           This applies a squared (no border-radius) filling color without changing the text color. */
+        a:not(.custom-hover):hover {
+            background-color: #00aa00;
+            border-radius: 0;
+        }
+        
+        /* For links with blue background, change text color to blue on hover 
+           Using the blue-black color from the TUI theme instead of #007BFF */
+        .tui-tab:hover, 
+        .tui-panel-title:hover, 
+        .blue-255-text:hover,
+        .blue-168-text:hover,
+        .tui-panel a:hover,
+        .tui-tab-content a:not(.email-link):hover {
+            color: #000084 !important; /* This is the blue-black color used in the TUI theme */
+        }
+        
+        /* Make email links in contact section use blue text on hover, but NOT the copied indicator */
+        #contact .email-link:hover {
+            color: #000084 !important; /* Match the same blue color */
+        }
+        
+        /* Override the hover color for the copied indicator within email links */
+        #contact .email-link:hover .copied-indicator {
+            color: #aa0000 !important; /* Keep the red color for "Copied!" text on hover */
+        }
+        
+        /* For gray text links, change text color to match background color on hover for better visibility */
+        a[style*="color: gray"]:hover,
+        a[style*="color: #888"]:hover,
+        a[style*="color: #999"]:hover,
+        a[style*="color: #aaa"]:hover,
+        a[style*="color: #ccc"]:hover,
+        a.content-footer:hover,
+        .content-footer a:hover,
+        a.gray-text:hover,
+        .gray-168-text a:hover,
+        .gray-255-text a:hover {
+            color: white !important;
+        }
     </style>
 </head>
 
@@ -140,17 +181,17 @@
                 </li>
                 <div class="tui-black-divider"></div>
                 <li>
-                    <a href="#" data-link-type="linkedin" target="_blank">
+                    <a href="https://linkedin.com/in/wagnermontes" data-link-type="linkedin" target="_blank">
                         <span class="red-168-text">L</span>inkedIn
                     </a>
                 </li>
                 <li>
-                    <a href="#" data-link-type="github" target="_blank">
+                    <a href="https://github.com/wsmontes" data-link-type="github" target="_blank">
                         <span class="red-168-text">G</span>itHub
                     </a>
                 </li>
                 <li>
-                    <a href="#" data-link-type="imdb" target="_blank">
+                    <a href="https://www.imdb.com" data-link-type="imdb" target="_blank">
                         <span class="red-168-text">I</span>MDB
                     </a>
                 </li>
@@ -214,9 +255,9 @@
         <!-- Status bar -->
         <div class="tui-statusbar absolute">
             <ul>
-                <li><a href="#" data-link-type="linkedin" target="_blank"><span class="red-168-text">F1</span> LinkedIn</a></li>
-                <li><a href="#" data-link-type="github" target="_blank"><span class="red-168-text">F2</span> GitHub</a></li>
-                <li><a href="#" data-link-type="imdb" target="_blank"><span class="red-168-text">F3</span> IMDB</a></li>
+                <li><a href="https://linkedin.com/in/wagnermontes" data-link-type="linkedin" target="_blank"><span class="red-168-text">F1</span> LinkedIn</a></li>
+                <li><a href="https://github.com/wsmontes" data-link-type="github" target="_blank"><span class="red-168-text">F2</span> GitHub</a></li>
+                <li><a href="https://www.imdb.com" data-link-type="imdb" target="_blank"><span class="red-168-text">F3</span> IMDB</a></li>
                 <li><a href="#" class="email-link" onclick="handleEmailClick(event)"><span class="red-168-text">F4</span> Email</a></li>
             </ul>
             <ul class="right-align-menu">
@@ -228,7 +269,7 @@
                                 <li>Template based on <a href="https://github.com/vinibiavatti1/TuiCss" target="_blank">TuiCss</a></li>
                             </ul>
                             <a href="https://github.com/vinibiavatti1/TuiCss" target="_blank">
-                                <img src="images/TUICSS.png" alt="TUICSS Framework" style="width: 33.33%; margin-top: 10px; display: block; margin-left: auto; margin-right: auto;">
+                                <img src="images/TUICSS.png" alt="TUICSS Framework" style="width: 16.67%; margin-top: 10px; display: block; margin-left: auto; margin-right: auto;">
                             </a>
                         </div>
                     </div>
@@ -240,9 +281,10 @@
 
     <!-- JavaScript -->
     <script src="tuicss.min.js"></script>
+    <!-- Load contact-manager.js before navigation.js -->
+    <script src="js/contact-manager.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/terminal-ui.js"></script>
-    <script src="js/contact-manager.js"></script>
     <script src="js/content-manager.js"></script>
 </body>
 

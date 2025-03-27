@@ -81,7 +81,14 @@ class ContactManager {
             const linkType = link.getAttribute('data-link-type');
             const linkUrl = this.getLink(linkType);
             if (linkUrl !== '#') {
+                // Set the href and add target attributes for external links
                 link.href = linkUrl;
+                
+                // Always open external links in a new tab
+                if (linkUrl.startsWith('http') || linkUrl.startsWith('//')) {
+                    link.setAttribute('target', '_blank');
+                    link.setAttribute('rel', 'noopener noreferrer');
+                }
             }
         });
         
@@ -170,7 +177,7 @@ class ContactManager {
             this.copyEmailToClipboard(email).then(() => {
                 // Show "Copied!" temporarily but keep the email visible
                 const tempElement = document.createElement('span');
-                tempElement.className = 'copied-indicator green-168-text';
+                tempElement.className = 'copied-indicator red-168-text'; // Changed to red
                 tempElement.textContent = ' (Copied!)';
                 link.appendChild(tempElement);
                 
@@ -213,7 +220,7 @@ class ContactManager {
             // Copy to clipboard
             this.copyEmailToClipboard(email).then(() => {
                 // Change text to "Copied"
-                link.innerHTML = '<span class="red-168-text">E</span>mail <span class="green-168-text">(Copied!)</span>';
+                link.innerHTML = '<span class="red-168-text">E</span>mail <span class="red-168-text">(Copied!)</span>'; // Changed to red
                 
                 // After 3 seconds, revert back to just showing "Email"
                 setTimeout(() => {
@@ -225,6 +232,9 @@ class ContactManager {
         } else {
             // First click - reveal email
             link.innerHTML = '<span class="red-168-text">E</span>mail: ' + email;
+            
+            // Do NOT automatically reset after timeout - this was causing strange behavior
+            // Let the user click again to copy and reset
         }
     }
     
@@ -254,7 +264,7 @@ class ContactManager {
             this.copyEmailToClipboard(email).then(() => {
                 // Show "Copied!" temporarily but keep the email visible
                 const tempElement = document.createElement('span');
-                tempElement.className = 'copied-indicator green-168-text';
+                tempElement.className = 'copied-indicator red-168-text'; // Changed to red
                 tempElement.textContent = ' (Copied!)';
                 
                 // Keep the F4 and email, just add the indicator
@@ -284,13 +294,20 @@ class ContactManager {
      * @returns {string} - Text with replaced placeholders
      */
     processText(text) {
-        // Replace {{link:type}} with actual links
+        // Replace markdown links that contain {{link:type}} placeholders
+        text = text.replace(/\[([^\]]+)\]\(\{\{link:([a-z]+)\}\}\)/g, (match, linkText, type) => {
+            const url = this.getLink(type);
+            if (url === '#') return match; // Don't replace if link not found
+            
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+        });
+        
+        // Replace any remaining {{link:type}} placeholders with just the URL
         text = text.replace(/\{\{link:([a-z]+)\}\}/g, (match, type) => {
             return this.getLink(type);
         });
         
-        // Replace {{email}} with clickable email link WITHOUT inline onclick so that 
-        // the event listener is attached only once by setupEmailHandlers.
+        // Replace {{email}} with clickable email link
         text = text.replace(/\{\{email\}\}/g, '<a href="#" class="email-link">Click to reveal email</a>');
         
         return text;

@@ -8,9 +8,13 @@ function handleResponsiveLayout() {
     const windowWidth = window.innerWidth;
     const contentArea = document.querySelector('.content-area');
     
+    // Detect iOS
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                 (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    
     // Calculate proper height based on screen size
-    if (windowWidth <= 575) {
-        // Small phones - scrollable body
+    if (windowWidth <= 767) { // Both small and tablet sizes
+        // Mobile & tablets - scrollable body
         document.body.style.overflow = 'auto';
         document.documentElement.style.overflow = 'auto';
         
@@ -18,16 +22,19 @@ function handleResponsiveLayout() {
             contentArea.style.height = 'auto';
             contentArea.style.maxHeight = 'none';
             contentArea.style.overflowY = 'visible';
-        }
-    } else if (windowWidth <= 767) {
-        // Tablets - scrollable body with some constraints
-        document.body.style.overflow = 'auto';
-        document.documentElement.style.overflow = 'auto';
-        
-        if (contentArea) {
-            contentArea.style.height = 'auto';
-            contentArea.style.maxHeight = `${windowHeight - 150}px`;
-            contentArea.style.overflowY = 'visible';
+            
+            // Add iOS specific rules
+            if (isIOS) {
+                contentArea.style.webkitOverflowScrolling = 'touch';
+                
+                // Force redraw on iOS
+                setTimeout(() => {
+                    contentArea.style.display = 'none';
+                    // Force reflow
+                    void contentArea.offsetHeight;
+                    contentArea.style.display = 'block';
+                }, 50);
+            }
         }
     } else {
         // Desktop - terminal style with fixed container
@@ -115,6 +122,12 @@ function initTerminalUI() {
     window.addEventListener('resize', function() {
         handleResponsiveLayout();
         optimizeNavbar();
+    });
+    
+    // Handle iOS orientation changes specifically
+    window.addEventListener('orientationchange', function() {
+        // Allow time for the orientation change to complete
+        setTimeout(handleResponsiveLayout, 100);
     });
 }
 

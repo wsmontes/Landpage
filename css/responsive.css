@@ -91,11 +91,13 @@
 @media screen and (min-width: 576px) and (max-width: 767px) {
     html, body {
         overflow: auto;
+        height: auto; /* Reset height for mobile */
     }
     
     .fullscreen-container {
         height: auto;
         min-height: 100vh;
+        overflow: visible; /* Add explicit visible */
     }
     
     .tui-window.full-width {
@@ -112,6 +114,7 @@
         height: auto;
         max-height: none;
         overflow-y: visible; /* Change from auto to visible */
+        -webkit-overflow-scrolling: touch; /* Add for iOS scrolling */
     }
     
     .skill-bar {
@@ -241,6 +244,8 @@
 @media screen and (max-width: 575px) {
     html, body {
         overflow: auto;
+        height: auto; /* Reset height for mobile */
+        -webkit-text-size-adjust: 100%; /* Prevent iOS font size adjustments */
     }
     
     .fullscreen-container {
@@ -250,14 +255,17 @@
     }
     
     .tui-window.full-width {
+        position: relative; /* Ensure position context */
         height: auto;
         min-height: calc(100vh - 80px);
         margin-bottom: 40px;
     }
     
     .tui-fieldset {
+        position: relative; /* Ensure position context */
         height: auto;
         padding: 5px;
+        overflow: visible; /* Add explicit */
     }
     
     .content-area {
@@ -498,5 +506,18 @@
     
     .contact-table td:first-child {
         width: 25%;
+    }
+    
+    /* iOS-specific fixes for small screens */
+    @supports (-webkit-touch-callout: none) {
+        .skill-files, .subskill-content {
+            /* Fix for iOS Safari */
+            transform: translateZ(0); /* Force GPU acceleration */
+        }
+        
+        .content-area {
+            /* Fix content clipping on iOS */
+            -webkit-transform: translate3d(0,0,0);
+        }
     }
 }

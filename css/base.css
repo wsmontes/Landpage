@@ -5,6 +5,27 @@ html, body {
     padding: 0;
     overflow: hidden;
     font-family: "Lucida Console", Monaco, monospace;
+    /* Fix iOS Safari overflow issues */
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+}
+
+/* iOS-specific overrides */
+@supports (-webkit-touch-callout: none) {
+    html, body {
+        /* Fix height issues on iOS */
+        height: -webkit-fill-available;
+    }
+    
+    .fullscreen-container {
+        min-height: -webkit-fill-available;
+    }
+    
+    /* Force content to be visible */
+    .content-area, .skill-files, .subskill-content {
+        overflow-y: visible !important;
+        -webkit-overflow-scrolling: touch;
+    }
 }
 
 .fullscreen-container {
@@ -118,6 +139,8 @@ html, body {
     /* Allow dynamic expansion */
     height: auto;
     overflow: visible;
+    /* Add for iOS */
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Remove custom scrollbar styles for the file directory since we're not using scrollbars anymore */
@@ -179,6 +202,8 @@ html, body {
     width: auto;
     height: auto;
     overflow: visible;
+    /* Add for iOS */
+    -webkit-overflow-scrolling: touch;
 }
 
 .subskill-loading {

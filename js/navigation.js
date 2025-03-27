@@ -80,72 +80,6 @@ function setupSidenavClickOutside() {
     });
 }
 
-// Email obfuscation function with clipboard functionality
-function handleEmailClick(event) {
-    event.preventDefault();
-    const email = "wmontes@gmail.com";
-    const link = event.target.closest('.email-link');
-    
-    // If the email is already displayed (link text contains the email)
-    if (link.textContent.includes(email)) {
-        // Copy to clipboard
-        navigator.clipboard.writeText(email).then(() => {
-            // Change text to "Copied"
-            const originalContent = link.innerHTML;
-            
-            // Replace email with "Copied" text
-            link.innerHTML = link.innerHTML.replace(email, '<span class="green-168-text">Copied!</span>');
-            
-            // After 3 seconds, revert back to showing the email
-            setTimeout(() => {
-                link.innerHTML = originalContent;
-            }, 3000);
-        }).catch(err => {
-            console.error('Could not copy text: ', err);
-        });
-    } else {
-        // First click - reveal email
-        if (link.querySelector('span')) {
-            const spanElement = link.querySelector('span');
-            const spanText = spanElement.textContent;
-            link.innerHTML = `<span class="${spanElement.className}">${spanText}</span> ${email}`;
-        } else {
-            link.textContent = email;
-        }
-    }
-}
-
-// Email function for side menu that resets to "Email" text
-function handleSideMenuEmail(event) {
-    event.preventDefault();
-    const email = "wmontes@gmail.com";
-    const link = event.target.closest('.sidemenu-email');
-    
-    // If the email is already displayed (link text contains the email)
-    if (link.textContent.includes(email)) {
-        // Copy to clipboard
-        navigator.clipboard.writeText(email).then(() => {
-            // Change text to "Copied"
-            link.innerHTML = '<span class="red-168-text">E</span>mail <span class="green-168-text">(Copied!)</span>';
-            
-            // After 3 seconds, revert back to just showing "Email"
-            setTimeout(() => {
-                link.innerHTML = '<span class="red-168-text">E</span>mail';
-            }, 3000);
-        }).catch(err => {
-            console.error('Could not copy text: ', err);
-        });
-    } else {
-        // First click - reveal email
-        link.innerHTML = '<span class="red-168-text">E</span>mail: ' + email;
-        
-        // After 3 seconds, revert back to just showing "Email"
-        setTimeout(() => {
-            link.innerHTML = '<span class="red-168-text">E</span>mail';
-        }, 5000);
-    }
-}
-
 // Handle F10 dropdown behavior for touch devices
 function initF10TouchBehavior() {
     const sourceCodeDropdown = document.querySelector('.source-code-dropdown .tui-dropdown > a');
@@ -178,8 +112,60 @@ function initNavigation() {
 }
 
 // Add the functions to the global scope so they can be called from HTML onclick
-window.handleEmailClick = handleEmailClick;
-window.handleSideMenuEmail = handleSideMenuEmail;
+
+// Remove the duplicate email routines defined here since they conflict with contact-manager.js
+// Comment out or delete the following email functions:
+
+// function handleEmailClick(event) {
+//     event.preventDefault();
+//     const email = "wmontes@gmail.com";
+//     const link = event.target.closest('.email-link');
+//     if (link.textContent.includes(email)) {
+//         navigator.clipboard.writeText(email).then(() => {
+//             const originalContent = link.innerHTML;
+//             link.innerHTML = link.innerHTML.replace(email, '<span class="green-168-text">Copied!</span>');
+//             setTimeout(() => {
+//                 link.innerHTML = originalContent;
+//             }, 3000);
+//         }).catch(err => {
+//             console.error('Could not copy text: ', err);
+//         });
+//     } else {
+//         if (link.querySelector('span')) {
+//             const spanElement = link.querySelector('span');
+//             const spanText = spanElement.textContent;
+//             link.innerHTML = `<span class="${spanElement.className}">${spanText}</span> ${email}`;
+//         } else {
+//             link.textContent = email;
+//         }
+//     }
+// }
+
+// function handleSideMenuEmail(event) {
+//     event.preventDefault();
+//     const email = "wmontes@gmail.com";
+//     const link = event.target.closest('.sidemenu-email');
+//     if (link.textContent.includes(email)) {
+//         navigator.clipboard.writeText(email).then(() => {
+//             link.innerHTML = '<span class="red-168-text">E</span>mail <span class="green-168-text">(Copied!)</span>';
+//             setTimeout(() => {
+//                 link.innerHTML = '<span class="red-168-text">E</span>mail';
+//             }, 3000);
+//         }).catch(err => {
+//             console.error('Could not copy text: ', err);
+//         });
+//     } else {
+//         link.innerHTML = '<span class="red-168-text">E</span>mail: ' + email;
+//         setTimeout(() => {
+//             link.innerHTML = '<span class="red-168-text">E</span>mail';
+//         }, 5000);
+//     }
+// }
+
+// Remove duplicate global assignments for email handlers.
+// Comment out or delete the following lines:
+// window.handleEmailClick = handleEmailClick;
+// window.handleSideMenuEmail = handleSideMenuEmail;
 
 // Run when DOM is loaded
 document.addEventListener('DOMContentLoaded', initNavigation);

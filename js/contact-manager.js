@@ -162,10 +162,13 @@ class ContactManager {
         
         // If the email is already displayed (link text contains the email)
         if (link.textContent.includes(email)) {
+            // First, remove any existing copied indicators
+            const existingIndicators = link.querySelectorAll('.copied-indicator');
+            existingIndicators.forEach(indicator => indicator.remove());
+            
             // Copy to clipboard
             this.copyEmailToClipboard(email).then(() => {
                 // Show "Copied!" temporarily but keep the email visible
-                const originalText = link.textContent;
                 const tempElement = document.createElement('span');
                 tempElement.className = 'copied-indicator green-168-text';
                 tempElement.textContent = ' (Copied!)';
@@ -243,6 +246,10 @@ class ContactManager {
         
         // If the email is already displayed (link text contains the email)
         if (link.textContent.includes(email)) {
+            // First, remove any existing copied indicators
+            const existingIndicators = link.querySelectorAll('.copied-indicator');
+            existingIndicators.forEach(indicator => indicator.remove());
+            
             // Copy to clipboard
             this.copyEmailToClipboard(email).then(() => {
                 // Show "Copied!" temporarily but keep the email visible
@@ -282,8 +289,9 @@ class ContactManager {
             return this.getLink(type);
         });
         
-        // Replace {{email}} with clickable email link that uses our handler
-        text = text.replace(/\{\{email\}\}/g, '<a href="#" class="email-link" onclick="handleEmailClick(event)">Click to reveal email</a>');
+        // Replace {{email}} with clickable email link WITHOUT inline onclick so that 
+        // the event listener is attached only once by setupEmailHandlers.
+        text = text.replace(/\{\{email\}\}/g, '<a href="#" class="email-link">Click to reveal email</a>');
         
         return text;
     }

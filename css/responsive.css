@@ -218,10 +218,16 @@
     
     .skill-files {
         width: 100%;
+        margin-top: 5px;
     }
     
-    .skill-files-list {
-        gap: 5px 10px;
+    .skill-file {
+        font-size: 0.85em;
+    }
+    
+    .skill-file-size {
+        display: inline-block;
+        width: 100px;
     }
 }
 
@@ -261,7 +267,7 @@
     .skill-bar {
         flex-direction: column;
         align-items: flex-start;
-        margin-bottom: 25px;
+        margin-bottom: 20px;
         gap: 10px;
     }
     
@@ -440,6 +446,28 @@
         font-size: 1.2em;
     }
     
+    .skill-info {
+        width: 100%;
+    }
+    
+    .skill-files {
+        width: 100%;
+        margin-top: 5px;
+        padding: 5px;
+    }
+    
+    .skill-file {
+        font-size: 0.8em;
+    }
+    
+    .skill-file-size {
+        display: none; /* Hide file size on very small screens */
+    }
+    
+    .skill-volume-info {
+        font-size: 0.8em;
+    }
+    
     /* Very small screens - enhance touch targets */
     @media (max-width: 340px) {
         .tui-nav {
@@ -458,17 +486,5 @@
     
     .contact-table td:first-child {
         width: 25%;
-    }
-    
-    .skill-info {
-        width: 100%;
-    }
-    
-    .skill-files {
-        width: 100%;
-    }
-    
-    .skill-files-list {
-        gap: 5px;
     }
 }

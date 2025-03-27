@@ -311,61 +311,45 @@ class ContentManager {
             
             // Handle skill bars with years instead of percentages
             if (line.startsWith('@skill:')) {
-                const parts = line.substring(7).split(':');
-                if (parts.length >= 3) {
-                    const skillName = parts[0];
-                    const years = parseInt(parts[1], 10);
-                    const colorClass = parts[2] + '-168';
-                    
-                    // Create an ASCII-style year meter (default max 10 years)
-                    const maxYears = parts.length >= 4 ? parseInt(parts[3], 10) : 10;
-                    
-                    // Check if there are sub-skills (after the @ symbol in the last part)
-                    let subSkills = [];
-                    if (parts.length >= 5 && parts[4].includes('@')) {
-                        subSkills = parts[4].split('@').filter(s => s.trim() !== '');
+                // Use the skills renderer if available
+                if (window.skillsRenderer) {
+                    const skill = window.skillsRenderer.parseSkillLine(line);
+                    if (skill) {
+                        html += window.skillsRenderer.renderSkill(
+                            skill.name,
+                            skill.years,
+                            skill.color,
+                            skill.maxYears,
+                            skill.subSkills
+                        );
                     }
-                    
-                    // Generate the ASCII skill bar
-                    let barFilled = '';
-                    let barEmpty = '';
-                    
-                    // Create filled portion using full blocks
-                    for (let f = 0; f < years; f++) {
-                        barFilled += '█';
-                    }
-                    
-                    // Create empty portion using medium shade blocks (more visually consistent with filled blocks)
-                    for (let e = 0; e < (maxYears - years); e++) {
-                        barEmpty += '▒';
-                    }
-                    
-                    // Create a directory-style listing of sub-skills
-                    let subSkillsHtml = '';
-                    if (subSkills.length > 0) {
-                        subSkillsHtml = `
-                        <div class="skill-files">
-                            <div class="skill-files-header white-168-text">DIR> ${skillName.toUpperCase()}.SKL</div>
-                            <div class="skill-files-list">`;
+                } else {
+                    // Fallback to the original implementation if skills-renderer is not loaded
+                    const parts = line.substring(7).split(':');
+                    if (parts.length >= 3) {
+                        const skillName = parts[0];
+                        const years = parseInt(parts[1], 10);
+                        const colorClass = parts[2] + '-168';
                         
-                        // Generate each sub-skill as a "file"
-                        for (let i = 0; i < subSkills.length; i++) {
-                            // Use alternating colors for the files (cyan and green)
-                            const fileColor = i % 2 === 0 ? 'cyan' : 'green';
-                            subSkillsHtml += `
-                                <div class="skill-file">
-                                    <span class="${fileColor}-168-text">└─ ${subSkills[i].trim()}.DLL</span>
-                                </div>`;
+                        // Create an ASCII-style year meter (default max 10 years)
+                        const maxYears = parts.length >= 4 ? parseInt(parts[3], 10) : 10;
+                        
+                        // Generate the ASCII skill bar
+                        let barFilled = '';
+                        let barEmpty = '';
+                        
+                        // Create filled portion using full blocks
+                        for (let f = 0; f < years; f++) {
+                            barFilled += '█';
                         }
                         
-                        subSkillsHtml += `
-                            </div>
-                        </div>`;
-                    }
-                    
-                    html += `
-                    <div class="skill-bar">
-                        <div class="skill-info">
+                        // Create empty portion using medium shade blocks (more visually consistent with filled blocks)
+                        for (let e = 0; e < (maxYears - years); e++) {
+                            barEmpty += '▒';
+                        }
+                        
+                        html += `
+                        <div class="skill-bar">
                             <div class="yellow-168-text skill-name">${skillName}</div>
                             <div class="skill-year-container">
                                 <div class="skill-meter">
@@ -373,9 +357,8 @@ class ContentManager {
                                     <span class="skill-year-label cyan-168-text">${years} Years</span>
                                 </div>
                             </div>
-                        </div>
-                        ${subSkillsHtml}
-                    </div>`;
+                        </div>`;
+                    }
                 }
                 continue;
             }

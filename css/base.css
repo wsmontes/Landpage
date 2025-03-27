@@ -106,32 +106,94 @@ html, body {
     white-space: nowrap;
 }
 
-/* Retro file directory styling for sub-skills */
+/* Enhanced Retro file directory styling for sub-skills */
 .skill-files {
     flex: 1;
-    border: 1px solid #444;
+    border: 2px solid #00a8a8;
     background-color: #000;
-    padding: 5px;
+    padding: 8px;
     font-family: "Lucida Console", Monaco, monospace;
+    box-shadow: 4px 4px #000;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Add custom scrollbar for the file directory to match the DOS theme */
+.skill-files::-webkit-scrollbar {
+    width: 8px;
+}
+
+.skill-files::-webkit-scrollbar-track {
+    background-color: #000;
+}
+
+.skill-files::-webkit-scrollbar-thumb {
+    background-color: #00a8a8;
 }
 
 .skill-files-header {
-    margin-bottom: 5px;
-    padding-bottom: 3px;
-    border-bottom: 1px dotted #444;
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #00a8a8;
     font-family: "Lucida Console", Monaco, monospace;
+    font-weight: bold;
+    letter-spacing: 0.5px;
 }
 
 .skill-files-list {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px 15px;
+    flex-direction: column; /* Change to column for more authentic DOS look */
+    gap: 4px;
 }
 
 .skill-file {
     font-size: 0.9em;
     white-space: nowrap;
+    padding: 2px 0;
+    width: 100%;
+    font-family: "Lucida Console", Monaco, monospace;
+}
+
+.skill-file-icon {
+    display: inline-block;
+    width: 16px;
+    margin-right: 5px;
+    text-align: center;
+}
+
+.skill-file-name {
+    display: inline-block;
+}
+
+.skill-file-ext {
+    color: #00a8a8;
+}
+
+.skill-file-size {
+    color: #a8a8a8;
+    margin-left: 10px;
+    font-size: 0.9em;
+}
+
+/* Volume information in DOS style */
+.skill-volume-info {
+    margin-top: 10px;
+    border-top: 1px dotted #444;
+    padding-top: 5px;
+    font-size: 0.85em;
+    color: #a8a8a8;
+}
+
+/* Blinking cursor effect for DOS prompt */
+.dos-cursor {
+    animation: blink 1s step-end infinite;
+    display: inline-block;
+    margin-left: 3px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
 /* Experience cards */

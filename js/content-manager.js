@@ -88,10 +88,14 @@ class ContentManager {
             // Force browser to ignore cache
             this.loadContent(section, true)
                 .then(() => {
-                    // Update last updated timestamp
+                    // Update last updated timestamp in memory but don't display it
                     this.lastUpdated[section] = new Date();
                     
-                    // Remove the footer update code
+                    // Remove any existing footer if present
+                    const existingFooter = sectionElement.querySelector('.content-footer');
+                    if (existingFooter) {
+                        existingFooter.remove();
+                    }
                 });
         }
     }

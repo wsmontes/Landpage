@@ -208,6 +208,8 @@ class ContentManager {
         let inPanelBlock = false;
         let inSubskillBlock = false; // Add flag to track if we're inside a subskill block
         let currentPanel = '';
+        let lastLineWasSkill = false; // Track if the last processed line was a skill
+        let emptyLineCount = 0; // Track consecutive empty lines
         
         for (let i = 0; i < lines.length; i++) {
             let line = lines[i].trim();
@@ -228,11 +230,78 @@ class ContentManager {
                 continue;
             }
             
+            // Handle skill bars
+            if (line.startsWith('@skill:')) {
+                // If this is a skill bar, reset empty line counter
+                emptyLineCount = 0;
+                lastLineWasSkill = true;
+                
+                // Use the skills renderer if available
+                if (window.skillsRenderer) {
+                    const skill = window.skillsRenderer.parseSkillLine(line);
+                    if (skill) {
+                        html += window.skillsRenderer.renderSkill(
+                            skill.name,
+                            skill.years,
+                            skill.color,
+                            skill.maxYears,
+                            skill.subSkills
+                        );
+                    }
+                } else {
+                    // Fallback implementation for skill bars
+                    const parts = line.substring(7).split(':');
+                    if (parts.length >= 3) {
+                        const skillName = parts[0];
+                        const years = parseInt(parts[1], 10);
+                        const colorClass = parts[2] + '-168';
+                        
+                        // Create an ASCII-style year meter (default max 10 years)
+                        const maxYears = parts.length >= 4 ? parseInt(parts[3], 10) : 10;
+                        
+                        // Generate the ASCII skill bar
+                        let barFilled = '';
+                        let barEmpty = '';
+                        
+                        // Create filled portion using full blocks
+                        for (let f = 0; f < years; f++) {
+                            barFilled += '█';
+                        }
+                        
+                        // Create empty portion using medium shade blocks (more visually consistent with filled blocks)
+                        for (let e = 0; e < (maxYears - years); e++) {
+                            barEmpty += '▒';
+                        }
+                        
+                        html += `
+                        <div class="skill-bar">
+                            <div class="yellow-168-text skill-name">${skillName}</div>
+                            <div class="skill-year-container">
+                                <div class="skill-meter">
+                                    <span class="skill-year-bar ${colorClass}-text">[${barFilled}<span class="white-168-text">${barEmpty}</span>]</span>
+                                    <span class="skill-year-label cyan-168-text">${years} Years</span>
+                                </div>
+                            </div>
+                        </div>`;
+                    }
+                }
+                continue;
+            } else {
+                lastLineWasSkill = false;
+            }
+            
             // Skip empty lines outside of special blocks
             if (!line && !inCodeBlock && !inTableBlock && !inPanelBlock) {
-                html += '<br>';
+                // Only add a <br> if we haven't already added too many and we're not right after a skill
+                if (emptyLineCount < 1) {
+                    html += '<br>';
+                    emptyLineCount++;
+                }
                 continue;
             }
+            
+            // Reset empty line counter for non-empty lines
+            emptyLineCount = 0;
             
             // Handle code blocks
             if (line === '```') {
@@ -281,7 +350,7 @@ class ContentManager {
             if (line.startsWith('@panel:')) {
                 const title = line.substring(7).trim();
                 html += `
-                <div class="project-card tui-panel white-168">
+                <div class="project-card tui-panel white-168" style="width:100%">
                     <div class="tui-panel-header">
                         <span class="tui-panel-title blue-255-text">${title}</span>
                     </div>
@@ -298,18 +367,23 @@ class ContentManager {
                 
                 // First line is the description
                 if (panelLines.length > 0) {
-                    panelHtml += `<p>${this.parseInlineFormatting(panelLines[0])}</p><br>`;
+                    panelHtml += `<p class="mb-3">${this.parseInlineFormatting(panelLines[0])}</p>`;
                 }
+                
+                // Wrap key-value pairs in a container for better spacing
+                panelHtml += '<div class="panel-details">';
                 
                 // Remaining lines are key-value pairs
                 for (let j = 1; j < panelLines.length; j++) {
                     if (panelLines[j].includes(':')) {
                         const [key, value] = panelLines[j].split(':', 2);
-                        panelHtml += `<div><span class="red-168-text">${key}:</span> ${value.trim()}</div>`;
+                        panelHtml += `<div class="panel-detail-row"><span class="red-168-text">${key}:</span> ${value.trim()}</div>`;
                     } else {
-                        panelHtml += `<div>${panelLines[j]}</div>`;
+                        panelHtml += `<div class="panel-detail-row">${panelLines[j]}</div>`;
                     }
                 }
+                
+                panelHtml += '</div>'; // Close panel-details
                 
                 html += panelHtml;
                 html += '</div></div>';
@@ -379,19 +453,19 @@ class ContentManager {
             // Handle headings
             if (line.startsWith('# ')) {
                 const heading = line.substring(2);
-                html += `<h3 class="cyan-168-text">${heading}</h3>`;
+                html += `<h3 class="cyan-168-text mt-2 mb-2">${heading}</h3>`;
                 continue;
             }
             
             if (line.startsWith('## ')) {
                 const heading = line.substring(3);
-                html += `<h4 class="cyan-168-text">${heading}</h4>`;
+                html += `<h4 class="cyan-168-text mt-2 mb-2">${heading}</h4>`;
                 continue;
             }
             
             // Handle dividers
             if (line === '---') {
-                html += '<div class="tui-divider"></div>';
+                html += '<div class="tui-divider mb-3 mt-1"></div>';
                 continue;
             }
             

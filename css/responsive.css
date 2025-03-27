@@ -120,8 +120,8 @@
     .skill-bar {
         flex-direction: column;
         align-items: flex-start;
-        margin-bottom: 20px;
-        gap: 10px;
+        margin-bottom: 16px; /* Reduced from 24px for more compact view */
+        gap: 8px;
     }
     
     .skill-bar span {
@@ -143,11 +143,12 @@
     
     #projects .project-card {
         width: 100%;
+        margin-bottom: 32px; /* Increased from 16px to 32px for more spacing between cards on mobile */
     }
     
     #projects .tui-panel-content {
         min-height: auto;
-        padding: 15px;
+        padding: 12px; /* Slightly reduced padding */
     }
     
     /* Two-row top navigation - 80s style */
@@ -224,6 +225,7 @@
     .skill-files {
         width: 100%;
         margin-top: 5px;
+        margin-bottom: 16px;
         /* Remove any height limitations */
         max-height: none;
         height: auto;
@@ -237,6 +239,44 @@
     .skill-file-size {
         display: inline-block;
         width: 100px;
+    }
+    
+    .section-content {
+        padding: 0 16px; /* Consistent padding */
+    }
+    
+    .about-intro {
+        flex-direction: column; /* Stack vertically on tablets */
+        align-items: center;
+        gap: 16px;
+    }
+    
+    .about-photo-container {
+        float: none; /* Remove float on tablets */
+        margin-right: 0; /* Remove right margin */
+        max-width: 250px;
+        margin: 0 auto 16px auto; /* Center the photo */
+    }
+    
+    .about-text {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .about-content {
+        width: 100%;
+        margin-top: 10px;
+    }
+    
+    /* Center all paragraphs in about section */
+    #about .about-content p {
+        text-align: center;
+    }
+    
+    /* Keep pre blocks left-aligned */
+    #about .about-content pre,
+    #about .about-content .yellow-168-text {
+        text-align: left;
     }
 }
 
@@ -275,15 +315,15 @@
     }
     
     .section-content {
-        padding: 0 10px;
+        padding: 0 12px; /* Slightly smaller padding */
     }
     
-    /* Optimize skill bars for small screens */
+    /* Optimize skill bars for small screens with reduced spacing */
     .skill-bar {
         flex-direction: column;
         align-items: flex-start;
-        margin-bottom: 20px;
-        gap: 10px;
+        margin-bottom: 12px; /* Reduced from 20px for tighter spacing */
+        gap: 6px; /* Slightly reduced from 8px */
     }
     
     .skill-bar span {
@@ -309,11 +349,12 @@
     /* Project cards on small screens */
     #projects .project-card {
         width: 100%;
+        margin-bottom: 32px; /* Increased from 16px to 32px for more spacing between cards on mobile */
     }
     
     #projects .tui-panel-content {
         min-height: 0;
-        padding: 10px;
+        padding: 10px; /* Further reduced padding */
     }
     
     /* Tab navigation */
@@ -470,6 +511,7 @@
         width: 100%;
         margin-top: 5px;
         padding: 5px;
+        margin-bottom: 12px;
         /* Remove any height limitations */
         max-height: none;
         height: auto;
@@ -486,6 +528,33 @@
     
     .skill-volume-info {
         font-size: 0.8em;
+    }
+    
+    /* More compact vertical rhythm for tiny screens */
+    h3, h4 {
+        margin-bottom: 12px; /* Reduced from 16px */
+    }
+    
+    .tui-divider {
+        margin-bottom: 16px; /* Reduced from 24px */
+        margin-top: 8px;
+    }
+    
+    /* Contact section compact spacing */
+    #contact table {
+        margin-top: 12px;
+        margin-bottom: 16px;
+    }
+    
+    #contact table td {
+        padding: 6px 4px; /* Reduced padding */
+    }
+    
+    /* Subskill content for small screens */
+    .subskill-content {
+        margin-left: 12px; /* Reduced from 20px */
+        padding: 6px; /* Reduced from 8px */
+        margin-bottom: 12px; /* Reduced from 16px */
     }
     
     /* Very small screens - enhance touch targets */
@@ -519,5 +588,175 @@
             /* Fix content clipping on iOS */
             -webkit-transform: translate3d(0,0,0);
         }
+    }
+    
+    .about-intro {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+    
+    .about-photo-container {
+        float: none; /* Remove float on mobile */
+        margin-right: 0; /* Remove right margin */
+        max-width: 220px;
+        margin: 0 auto 16px auto; /* Center the photo */
+    }
+    
+    .about-text {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .about-content {
+        width: 100%;
+        text-align: left;
+        margin-top: 8px;
+    }
+    
+    /* Center all paragraphs in about section */
+    #about .about-content p {
+        text-align: center;
+    }
+    
+    /* Keep pre blocks left-aligned */
+    #about .about-content pre,
+    #about .about-content .yellow-168-text {
+        text-align: left;
+    }
+    
+    /* Status bar optimization for mobile - F-key only with expand on hover */
+    .tui-statusbar {
+        height: 44px;
+        padding: 0;
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 9;
+        background-color: rgb(168, 168, 168);
+    }
+    
+    .tui-statusbar ul {
+        display: flex;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        justify-content: space-between;
+    }
+    
+    .tui-statusbar ul li {
+        flex: 1;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: flex 0.25s ease;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+    }
+    
+    /* Show only F-keys by default */
+    .tui-statusbar ul li a {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+    }
+    
+    /* Hide labels by default */
+    .tui-statusbar ul li a span.red-168-text + * {
+        position: absolute;
+        left: -9999px;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+    
+    /* When hovering, expand the item and show the label */
+    .tui-statusbar ul li:hover {
+        flex: 3;
+        z-index: 2;
+    }
+    
+    .tui-statusbar ul li:hover a span.red-168-text + * {
+        position: static;
+        margin-left: 4px;
+        opacity: 1;
+    }
+    
+    /* Align items properly */
+    .tui-statusbar .right-align-menu {
+        position: relative;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Source code dropdown position */
+    .tui-statusbar .source-code-dropdown .tui-dropdown-content {
+        bottom: 100%;
+        right: 0;
+        left: auto;
+        width: auto;
+        min-width: 200px;
+        max-width: 90vw;
+    }
+}
+
+/* Super tiny screens (under 350px) - extremely compact spacing */
+@media screen and (max-width: 350px) {
+    /* Minimal spacing for very small screens */
+    .skill-bar {
+        margin-bottom: 8px; /* Reduced from 16px for ultra-compact layout */
+        gap: 4px;
+    }
+    
+    /* Even tighter spacing between skill files and next skill */
+    #skills .skill-files {
+        margin-bottom: 8px;
+    }
+    
+    h3, h4, h5, h6 {
+        margin-bottom: 8px;
+    }
+    
+    .tui-divider {
+        margin-bottom: 12px;
+        margin-top: 4px;
+    }
+    
+    p, ul, ol {
+        margin-bottom: 12px;
+    }
+    
+    #projects .project-card {
+        margin-bottom: 24px; /* Increased from 12px to 24px for tiny screens */
+    }
+    
+    #projects .tui-panel-content {
+        padding: 8px;
+    }
+    
+    .subskill-content {
+        margin-left: 8px;
+        padding: 4px;
+        margin-bottom: 8px;
+    }
+    
+    .about-intro {
+        margin-bottom: 12px;
+    }
+    
+    .about-photo-container {
+        max-width: 180px;
+        margin: 12px auto;
+    }
+    
+    .about-content {
+        margin-top: 4px;
     }
 }

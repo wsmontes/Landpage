@@ -91,16 +91,7 @@ class ContentManager {
                     // Update last updated timestamp
                     this.lastUpdated[section] = new Date();
                     
-                    // Update footer with last updated time if exists
-                    const footer = sectionElement.querySelector('.content-footer');
-                    if (footer) {
-                        footer.textContent = `Last updated: ${this.lastUpdated[section].toLocaleString()}`;
-                    } else {
-                        const newFooter = document.createElement('div');
-                        newFooter.className = 'content-footer';
-                        newFooter.textContent = `Last updated: ${this.lastUpdated[section].toLocaleString()}`;
-                        sectionElement.appendChild(newFooter);
-                    }
+                    // Remove the footer update code
                 });
         }
     }
@@ -190,11 +181,7 @@ class ContentManager {
             const html = this.parseTextToHtml(text);
             contentArea.innerHTML = html;
             
-            // Add footer with last updated time
-            const footer = document.createElement('div');
-            footer.className = 'content-footer';
-            footer.textContent = `Last updated: ${this.lastUpdated[section] ? this.lastUpdated[section].toLocaleString() : new Date().toLocaleString()}`;
-            contentArea.appendChild(footer);
+            // Remove the footer with last updated time
             
             // Reattach event handlers for newly created email links
             if (window.contactManager && window.contactManager.loaded) {

@@ -3,9 +3,94 @@
 
 @skill:Business Analysis:7:green:10@BPMN@UML@Use Cases@JAD@SWOT@RUP@Stakeholder Analysis
 
+@subskill:Business Analysis:BPMN
+# Business Process Model and Notation (BPMN)
+
+BPMN is a graphical representation for specifying business processes in business process modeling.
+
+## Experience & Application
+- Created detailed process models for insurance claim handling
+- Documented as-is and to-be processes for digital transformation projects
+- Led workshops to validate process models with stakeholders
+
+## Tools
+- Visio
+- Lucidchart
+- IBM Blueworks Live
+
+Learn more about BPMN at [BPMN.org](https://www.bpmn.org/)
+@endsubskill
+
+@subskill:Business Analysis:UML
+# Unified Modeling Language (UML)
+
+UML is a standardized modeling language enabling developers to specify, visualize, construct and document artifacts of software systems.
+
+## Experience & Application
+- Created use case diagrams for requirements gathering
+- Developed class diagrams for object-oriented designs
+- Used sequence diagrams to document system interactions
+
+## Notation Types
+- Structural Diagrams (Class, Component, Object)
+- Behavioral Diagrams (Use Case, Activity, State Machine)
+- Interaction Diagrams (Sequence, Communication)
+@endsubskill
+
 @skill:Artificial Intelligence:3:green:10@LLM@GPT@Chat Engineering@NLP@OpenAI@Python@BERT
 
+@subskill:Artificial Intelligence:LLM
+# Large Language Models (LLM)
+
+Large Language Models are deep learning models trained on massive text datasets to understand and generate human-like text.
+
+## Experience & Application
+- Implemented custom solutions using OpenAI's API
+- Fine-tuned models for specific business requirements
+- Developed prompt engineering techniques for optimal results
+
+## Technologies
+- GPT-4
+- Claude
+- LLaMA
+- Embeddings
+@endsubskill
+
+@subskill:Artificial Intelligence:GPT
+# Generative Pre-trained Transformers (GPT)
+
+GPT models are a family of large language models developed by OpenAI that use transformer architecture for text understanding and generation.
+
+## Experience & Application
+- Created custom AI assistants for business applications
+- Designed structured output formats for data extraction
+- Implemented safeguards and moderation for content generation
+
+## Features Used
+- Function calling
+- System prompts
+- Context windowing
+- Knowledge retrieval
+@endsubskill
+
 @skill:Data Science:4:green:10@SQL@Python@R@PowerBI@Tableau@ETL@Data Mining
+
+@subskill:Data Science:SQL
+# Structured Query Language (SQL)
+
+SQL is a domain-specific language used for managing and querying relational databases.
+
+## Experience & Application
+- Designed complex queries for business intelligence reporting
+- Optimized database performance through query tuning
+- Created stored procedures and views for data access
+
+## Databases Used
+- PostgreSQL
+- Microsoft SQL Server
+- MySQL
+- Oracle
+@endsubskill
 
 @skill:Product Development:6:green:10@Agile@Scrum@Kanban@User Stories@Wireframes@MVP@SAFe
 

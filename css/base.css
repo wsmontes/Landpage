@@ -152,27 +152,46 @@ html, body {
     padding: 2px 0;
     width: 100%;
     font-family: "Lucida Console", Monaco, monospace;
+    cursor: pointer; /* Add pointer cursor to indicate clickable */
 }
 
-.skill-file-icon {
-    display: inline-block;
-    width: 16px;
-    margin-right: 5px;
-    text-align: center;
+.skill-file:hover .skill-file-name {
+    text-decoration: underline; /* Indicate clickable on hover */
 }
 
-.skill-file-name {
-    display: inline-block;
+/* Styles for the subskill content expansion */
+.subskill-content {
+    margin-top: 5px;
+    margin-left: 20px;
+    padding: 8px;
+    border-left: 1px solid #00a8a8;
+    background-color: #000022; /* Slightly different background to distinguish */
+    font-family: "Lucida Console", Monaco, monospace;
+    word-wrap: break-word;
+    white-space: normal;
+    margin-bottom: 10px;
 }
 
-.skill-file-ext {
-    color: #00a8a8;
+.subskill-loading {
+    color: #a8a800; /* Yellow text for loading indicator */
+    font-style: italic;
 }
 
-.skill-file-size {
-    color: #a8a8a8;
-    margin-left: 10px;
-    font-size: 0.9em;
+.subskill-content-inner {
+    line-height: 1.4;
+}
+
+.subskill-content-inner p {
+    margin-bottom: 6px;
+}
+
+.subskill-content-inner a {
+    color: #00a8a8; /* Cyan links in subskill content */
+}
+
+.subskill-content-inner a:hover {
+    color: #00ffff; /* Brighter cyan on hover */
+    text-decoration: underline;
 }
 
 /* Volume information in DOS style */

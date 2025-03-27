@@ -149,6 +149,11 @@ class ContentManager {
                 // Cache the content
                 this.contentCache[section] = text;
                 
+                // If this is the skills section, also parse it for subskill content
+                if (section === 'skills' && window.skillsRenderer) {
+                    window.skillsRenderer.parseSkillsContent(text);
+                }
+                
                 // Parse and render the content
                 this.renderContent(section, text);
                 
@@ -210,10 +215,27 @@ class ContentManager {
         let inCodeBlock = false;
         let inTableBlock = false;
         let inPanelBlock = false;
+        let inSubskillBlock = false; // Add flag to track if we're inside a subskill block
         let currentPanel = '';
         
         for (let i = 0; i < lines.length; i++) {
             let line = lines[i].trim();
+            
+            // Skip subskill content - don't include it in the main page rendering
+            if (line.startsWith('@subskill:')) {
+                inSubskillBlock = true;
+                continue;
+            }
+            
+            if (line === '@endsubskill') {
+                inSubskillBlock = false;
+                continue;
+            }
+            
+            // Skip all content while inside a subskill block
+            if (inSubskillBlock) {
+                continue;
+            }
             
             // Skip empty lines outside of special blocks
             if (!line && !inCodeBlock && !inTableBlock && !inPanelBlock) {

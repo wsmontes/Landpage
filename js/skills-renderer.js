@@ -7,6 +7,9 @@ class SkillsRenderer {
     constructor() {
         // Empty constructor as we don't need state
         console.log("Skills renderer initialized");
+        this.expandedSubskill = null;
+        this.setupDocumentClickListener();
+        this.subskillContents = {}; // Store subskill contents from the main file
     }
 
     /**
@@ -81,10 +84,16 @@ class SkillsRenderer {
             // Clean up the sub-skill name for a DOS-compatible filename
             let fileName = subSkills[i].trim().toUpperCase().replace(/[^A-Z0-9]/g, '_');
             
+            // Create a data attribute for skill identification
+            const skillId = `${skillName.replace(/\s+/g, '_')}_${fileName}`.replace(/[^a-zA-Z0-9_]/g, '_');
+            
             html += `
-                <div class="skill-file">
+                <div class="skill-file" data-skill-id="${skillId}" data-skill-name="${skillName}" data-subskill-name="${subSkills[i].trim()}">
                     <span class="${fileColor}-168-text skill-file-icon">■</span>
                     <span class="${fileColor}-168-text skill-file-name">${fileName}</span>
+                    <div class="subskill-content" id="subskill-content-${skillId}" style="display: none;">
+                        <div class="subskill-loading">Loading...</div>
+                    </div>
                 </div>`;
         }
         
@@ -152,6 +161,214 @@ class SkillsRenderer {
         console.log('Parsed skill:', skill); // For debugging
         return skill;
     }
+    
+    /**
+     * Parse the skills content and extract subskill detailed content
+     * @param {string} content - The full skills.txt content
+     */
+    parseSkillsContent(content) {
+        if (!content) return;
+        
+        // Split into lines for processing
+        const lines = content.split('\n');
+        let currentParentSkill = null;
+        let currentSubskill = null;
+        let collectingContent = false;
+        let currentContent = '';
+        
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim();
+            
+            // Detect skill definition
+            if (line.startsWith('@skill:')) {
+                const skillLine = this.parseSkillLine(line);
+                if (skillLine) {
+                    currentParentSkill = skillLine.name;
+                }
+                continue;
+            }
+            
+            // Detect subskill content start
+            if (line.startsWith('@subskill:')) {
+                // Save previous subskill content if we were collecting it
+                if (collectingContent && currentParentSkill && currentSubskill) {
+                    this.saveSubskillContent(currentParentSkill, currentSubskill, currentContent);
+                }
+                
+                // Parse new subskill definition
+                const parts = line.substring(10).split(':');
+                if (parts.length >= 2) {
+                    currentParentSkill = parts[0];
+                    currentSubskill = parts[1];
+                    collectingContent = true;
+                    currentContent = '';
+                }
+                continue;
+            }
+            
+            // Detect subskill content end
+            if (line === '@endsubskill') {
+                if (collectingContent && currentParentSkill && currentSubskill) {
+                    this.saveSubskillContent(currentParentSkill, currentSubskill, currentContent);
+                }
+                collectingContent = false;
+                currentContent = '';
+                continue;
+            }
+            
+            // Collect content if we're inside a subskill definition
+            if (collectingContent) {
+                currentContent += line + '\n';
+            }
+        }
+        
+        // Save any remaining content
+        if (collectingContent && currentParentSkill && currentSubskill) {
+            this.saveSubskillContent(currentParentSkill, currentSubskill, currentContent);
+        }
+    }
+    
+    /**
+     * Save extracted subskill content to the cache
+     * @param {string} parentSkill - Parent skill name
+     * @param {string} subskill - Subskill name
+     * @param {string} content - Content for the subskill
+     */
+    saveSubskillContent(parentSkill, subskill, content) {
+        // Create a unique key for this subskill
+        const key = `${parentSkill}_${subskill}`.replace(/\s+/g, '_');
+        this.subskillContents[key] = content.trim();
+    }
+    
+    /**
+     * Setup event listeners for subskill click functionality
+     * This should be called after the skills are rendered to the DOM
+     */
+    setupSubskillListeners() {
+        document.querySelectorAll('.skill-file').forEach(file => {
+            // Remove existing listeners to prevent duplicates
+            file.removeEventListener('click', this.handleSubskillClick);
+            
+            // Add click listener
+            file.addEventListener('click', (e) => this.handleSubskillClick(e));
+        });
+    }
+    
+    /**
+     * Handle click on a subskill file
+     * @param {Event} e - Click event
+     */
+    handleSubskillClick(e) {
+        // Get the skill file element
+        const skillFile = e.currentTarget;
+        const skillId = skillFile.getAttribute('data-skill-id');
+        const skillName = skillFile.getAttribute('data-skill-name');
+        const subskillName = skillFile.getAttribute('data-subskill-name');
+        
+        // Get the content container
+        const contentContainer = skillFile.querySelector('.subskill-content');
+        
+        // If we're clicking the same skill that's already expanded, just close it
+        if (this.expandedSubskill === skillId && contentContainer.style.display !== 'none') {
+            contentContainer.style.display = 'none';
+            this.expandedSubskill = null;
+            return;
+        }
+        
+        // Close any previously opened subskill
+        if (this.expandedSubskill) {
+            const previousContent = document.querySelector(`#subskill-content-${this.expandedSubskill}`);
+            if (previousContent) {
+                previousContent.style.display = 'none';
+            }
+        }
+        
+        // Set this as the expanded subskill
+        this.expandedSubskill = skillId;
+        
+        // Show the content container
+        contentContainer.style.display = 'block';
+        
+        // Load content if it hasn't been loaded yet
+        if (contentContainer.querySelector('.subskill-loading')) {
+            this.loadSubskillContent(skillName, subskillName, contentContainer);
+        }
+        
+        // Prevent the event from bubbling up to document
+        e.stopPropagation();
+    }
+    
+    /**
+     * Load content for a specific subskill
+     * @param {string} skillName - Name of the parent skill
+     * @param {string} subskillName - Name of the subskill
+     * @param {HTMLElement} container - Container to load content into
+     */
+    loadSubskillContent(skillName, subskillName, container) {
+        // First check if we have the content in our cache
+        const key = `${skillName}_${subskillName}`.replace(/\s+/g, '_');
+        
+        if (this.subskillContents[key]) {
+            // We have pre-loaded content from the main skills file
+            let text = this.subskillContents[key];
+            
+            // If content manager is available, process links and other formatting
+            if (window.contentManager) {
+                text = window.contentManager.parseTextToHtml(text);
+            }
+            
+            // Update the container with the content
+            container.innerHTML = `<div class="subskill-content-inner white-168-text">${text}</div>`;
+            return;
+        }
+        
+        // Fallback to the old method of fetching separate files
+        const fileName = `${skillName.replace(/\s+/g, '_')}_${subskillName.replace(/\s+/g, '_')}`.replace(/[^a-zA-Z0-9_]/g, '_');
+        const filePath = `content/subskills/${fileName}.txt`;
+        
+        // Fetch the content
+        fetch(filePath)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`No content available for ${subskillName}`);
+                }
+                return response.text();
+            })
+            .then(text => {
+                // If content manager is available, process links and other formatting
+                if (window.contentManager) {
+                    text = window.contentManager.parseTextToHtml(text);
+                }
+                
+                // Update the container with the content
+                container.innerHTML = `<div class="subskill-content-inner white-168-text">${text}</div>`;
+            })
+            .catch(error => {
+                // Show placeholder content for missing files
+                container.innerHTML = `
+                <div class="subskill-content-inner">
+                    <p class="cyan-168-text">${subskillName}</p>
+                    <p class="white-168-text">Detailed information about ${subskillName} within ${skillName}.</p>
+                    <p class="yellow-168-text">Add content using the @subskill:${skillName}:${subskillName} format in skills.txt</p>
+                </div>`;
+            });
+    }
+    
+    /**
+     * Setup a document-wide click listener to close expanded subskill when clicking outside
+     */
+    setupDocumentClickListener() {
+        document.addEventListener('click', (e) => {
+            // If we have an expanded subskill and click is outside any skill file
+            if (this.expandedSubskill && !e.target.closest('.skill-file')) {
+                const contentContainer = document.querySelector(`#subskill-content-${this.expandedSubskill}`);
+                if (contentContainer) {
+                    contentContainer.style.display = 'none';
+                }
+                this.expandedSubskill = null;
+            }
+        });
+    }
 }
 
 // Initialize skills renderer as soon as the script loads
@@ -164,4 +381,20 @@ window.skillsRenderer = skillsRenderer;
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Skills renderer ready');
     window.skillsRenderer = skillsRenderer;
+    
+    // Load the skills content to extract subskill details
+    fetch('content/skills.txt')
+        .then(response => response.text())
+        .then(content => {
+            window.skillsRenderer.parseSkillsContent(content);
+        })
+        .catch(error => {
+            console.error('Error loading skills content:', error);
+        })
+        .finally(() => {
+            // Setup additional functionality after content is loaded
+            setTimeout(() => {
+                window.skillsRenderer.setupSubskillListeners();
+            }, 1000);
+        });
 });

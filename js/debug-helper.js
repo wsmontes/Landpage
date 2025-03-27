@@ -4,7 +4,7 @@
  */
 
 // Enable debug mode
-const DEBUG_MODE = true;
+const DEBUG_MODE = false;
 
 // Create a debug console logger that can be toggled
 function debugLog(...args) {

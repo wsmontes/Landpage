@@ -138,6 +138,31 @@
         .gray-255-text a:hover {
             color: white !important;
         }
+        
+        /* Fix for skills page layout at smaller screen widths */
+        @media screen and (max-width: 767px) {
+            /* Reduce vertical spacing between skill bars and directory windows */
+            #skills .skill-bar + .tui-window,
+            #skills .skill-container .tui-window {
+                margin-top: 5px !important;
+            }
+            
+            /* Ensure proper stacking of elements */
+            #skills .skill-container {
+                margin-bottom: 15px;
+            }
+            
+            /* Adjust any potential flex layout issues */
+            #skills .skill-row {
+                flex-direction: column;
+            }
+            
+            /* Override the problematic flex value causing the spacing issue */
+            #skills .skill-info {
+                flex: none !important; /* Remove the 300px flex value */
+                width: 100%; /* Ensure it takes full width */
+            }
+        }
     </style>
 </head>
 

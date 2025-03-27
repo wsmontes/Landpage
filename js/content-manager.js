@@ -6,7 +6,12 @@
 class ContentManager {
     constructor() {
         this.contentPath = 'content/';
-        this.sections = ['about', 'skills', 'experience', 'contact'];
+        // Change 'experience' to 'projects' to match the HTML tab ID
+        this.sections = ['about', 'skills', 'projects', 'contact'];
+        // Map sections to their content files if different
+        this.sectionFiles = {
+            'projects': 'experience'
+        };
         this.contentCache = {};
         this.lastUpdated = {};
     }
@@ -101,6 +106,19 @@ class ContentManager {
     }
 
     /**
+     * Refresh content that depends on contact info
+     * Called when contact manager is loaded
+     */
+    refreshContactInfo() {
+        // Reload contact section specifically
+        this.refreshSection('contact');
+        
+        // If any other sections use contact info, reload them too
+        // For example, if about section has contact info:
+        // this.refreshSection('about');
+    }
+
+    /**
      * Load all content sections
      */
     loadAllContent() {
@@ -116,7 +134,9 @@ class ContentManager {
      * @returns {Promise} - Promise that resolves when content is loaded
      */
     loadContent(section, forceRefresh = false) {
-        const url = `${this.contentPath}${section}.txt${forceRefresh ? '?t=' + new Date().getTime() : ''}`;
+        // Get the correct file name (may be different from section ID)
+        const fileName = this.sectionFiles[section] || section;
+        const url = `${this.contentPath}${fileName}.txt${forceRefresh ? '?t=' + new Date().getTime() : ''}`;
         
         return fetch(url)
             .then(response => {
@@ -126,11 +146,6 @@ class ContentManager {
                 return response.text();
             })
             .then(text => {
-                // Process text with contact manager if available
-                if (window.contactManager && window.contactManager.loaded) {
-                    text = window.contactManager.processText(text);
-                }
-                
                 // Cache the content
                 this.contentCache[section] = text;
                 
@@ -161,6 +176,11 @@ class ContentManager {
         const contentArea = sectionElement.querySelector('.section-content');
         
         if (contentArea) {
+            // Process text with contact manager if available
+            if (window.contactManager && window.contactManager.loaded) {
+                text = window.contactManager.processText(text);
+            }
+            
             // Parse the text content and convert to HTML
             const html = this.parseTextToHtml(text);
             contentArea.innerHTML = html;
@@ -170,6 +190,11 @@ class ContentManager {
             footer.className = 'content-footer';
             footer.textContent = `Last updated: ${this.lastUpdated[section] ? this.lastUpdated[section].toLocaleString() : new Date().toLocaleString()}`;
             contentArea.appendChild(footer);
+            
+            // Reattach event handlers for newly created email links
+            if (window.contactManager && window.contactManager.loaded) {
+                window.contactManager.setupEmailHandlers();
+            }
         }
     }
 

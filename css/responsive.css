@@ -57,14 +57,33 @@
     
     .skill-bar {
         flex-wrap: wrap;
+        flex-direction: column;
+        gap: 10px;
     }
     
     .skill-bar span {
         min-width: 150px;
     }
     
+    .skill-bar span.skill-name {
+        min-width: 150px;
+    }
+    
     .tui-tab {
         padding: 5px 8px;
+    }
+    
+    .skill-year-container {
+        max-width: 100%;
+    }
+    
+    .skill-info {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+    
+    .skill-files {
+        width: 100%;
     }
 }
 
@@ -97,15 +116,25 @@
     .skill-bar {
         flex-direction: column;
         align-items: flex-start;
+        margin-bottom: 20px;
+        gap: 10px;
     }
     
     .skill-bar span {
         margin-bottom: 5px;
     }
     
-    .skill-bar .tui-progress-bar {
+    .skill-bar span.skill-name {
+        margin-bottom: 3px;
+    }
+    
+    .skill-year-container {
         width: 100%;
-        margin-left: 0 !important;
+        max-width: 100%;
+    }
+    
+    .skill-meter {
+        gap: 5px;
     }
     
     #projects .project-card {
@@ -182,6 +211,18 @@
     .tui-sidenav-button {
         font-size: 1.2em;
     }
+    
+    .skill-info {
+        width: 100%;
+    }
+    
+    .skill-files {
+        width: 100%;
+    }
+    
+    .skill-files-list {
+        gap: 5px 10px;
+    }
 }
 
 /* Small phones */
@@ -220,7 +261,8 @@
     .skill-bar {
         flex-direction: column;
         align-items: flex-start;
-        margin-bottom: 15px;
+        margin-bottom: 25px;
+        gap: 10px;
     }
     
     .skill-bar span {
@@ -228,9 +270,19 @@
         margin-right: 0;
     }
     
-    .skill-bar .tui-progress-bar {
+    .skill-bar span.skill-name {
+        margin-bottom: 3px;
+        margin-right: 0;
+    }
+    
+    .skill-year-container {
         width: 100%;
-        margin-left: 0 !important;
+        max-width: 100%;
+    }
+    
+    .skill-meter {
+        flex-wrap: wrap;
+        gap: 5px;
     }
     
     /* Project cards on small screens */
@@ -406,5 +458,17 @@
     
     .contact-table td:first-child {
         width: 25%;
+    }
+    
+    .skill-info {
+        width: 100%;
+    }
+    
+    .skill-files {
+        width: 100%;
+    }
+    
+    .skill-files-list {
+        gap: 5px;
     }
 }

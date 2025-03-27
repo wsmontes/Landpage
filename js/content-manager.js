@@ -309,21 +309,72 @@ class ContentManager {
                 continue;
             }
             
-            // Handle skill bars
+            // Handle skill bars with years instead of percentages
             if (line.startsWith('@skill:')) {
                 const parts = line.substring(7).split(':');
                 if (parts.length >= 3) {
                     const skillName = parts[0];
-                    const percentage = parts[1];
+                    const years = parseInt(parts[1], 10);
                     const colorClass = parts[2] + '-168';
+                    
+                    // Create an ASCII-style year meter (default max 10 years)
+                    const maxYears = parts.length >= 4 ? parseInt(parts[3], 10) : 10;
+                    
+                    // Check if there are sub-skills (after the @ symbol in the last part)
+                    let subSkills = [];
+                    if (parts.length >= 5 && parts[4].includes('@')) {
+                        subSkills = parts[4].split('@').filter(s => s.trim() !== '');
+                    }
+                    
+                    // Generate the ASCII skill bar
+                    let barFilled = '';
+                    let barEmpty = '';
+                    
+                    // Create filled portion using full blocks
+                    for (let f = 0; f < years; f++) {
+                        barFilled += '█';
+                    }
+                    
+                    // Create empty portion using medium shade blocks (more visually consistent with filled blocks)
+                    for (let e = 0; e < (maxYears - years); e++) {
+                        barEmpty += '▒';
+                    }
+                    
+                    // Create a directory-style listing of sub-skills
+                    let subSkillsHtml = '';
+                    if (subSkills.length > 0) {
+                        subSkillsHtml = `
+                        <div class="skill-files">
+                            <div class="skill-files-header white-168-text">DIR> ${skillName.toUpperCase()}.SKL</div>
+                            <div class="skill-files-list">`;
+                        
+                        // Generate each sub-skill as a "file"
+                        for (let i = 0; i < subSkills.length; i++) {
+                            // Use alternating colors for the files (cyan and green)
+                            const fileColor = i % 2 === 0 ? 'cyan' : 'green';
+                            subSkillsHtml += `
+                                <div class="skill-file">
+                                    <span class="${fileColor}-168-text">└─ ${subSkills[i].trim()}.DLL</span>
+                                </div>`;
+                        }
+                        
+                        subSkillsHtml += `
+                            </div>
+                        </div>`;
+                    }
                     
                     html += `
                     <div class="skill-bar">
-                        <span class="yellow-168-text">${skillName}</span>
-                        <div class="tui-progress-bar inline-block valign-middle" style="width: 300px; margin-left: 20px;">
-                            <span class="tui-progress-label black-text">${percentage}%</span>
-                            <span class="tui-progress ${colorClass}" style="width: ${percentage}%"></span>
+                        <div class="skill-info">
+                            <div class="yellow-168-text skill-name">${skillName}</div>
+                            <div class="skill-year-container">
+                                <div class="skill-meter">
+                                    <span class="skill-year-bar ${colorClass}-text">[${barFilled}<span class="white-168-text">${barEmpty}</span>]</span>
+                                    <span class="skill-year-label cyan-168-text">${years} Years</span>
+                                </div>
+                            </div>
                         </div>
+                        ${subSkillsHtml}
                     </div>`;
                 }
                 continue;

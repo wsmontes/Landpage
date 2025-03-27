@@ -1,23 +1,23 @@
 # TECHNICAL CAPABILITIES
 ---
 
-@skill:Business Analysis:95:green
+@skill:Business Analysis:7:green:10@BPMN@UML@Use Cases@JAD@SWOT@RUP@Stakeholder Analysis
 
-@skill:Artificial Intelligence:90:green
+@skill:Artificial Intelligence:3:green:10@LLM@GPT@Chat Engineering@NLP@OpenAI@Python@BERT
 
-@skill:Data Science:85:green
+@skill:Data Science:4:green:10@SQL@Python@R@PowerBI@Tableau@ETL@Data Mining
 
-@skill:Product Development:90:green
+@skill:Product Development:6:green:10@Agile@Scrum@Kanban@User Stories@Wireframes@MVP@SAFe
 
-@skill:Process Modeling:90:green
+@skill:Process Modeling:5:green:10@BPMN 2.0@Visio@Lucidchart@UML@Workflow@SOPs@BPR
 
 ## ADDITIONAL EXPERTISE
 ---
 
-@skill:Agile Methodologies:92:green
+@skill:Agile Methodologies:4:green:10@Scrum@Kanban@SAFe@Sprints@User Stories@Backlog@Ceremonies
 
-@skill:Change Management:90:green
+@skill:Change Management:3:green:10@ADKAR@Prosci@Kotter@Culture Alignment@Communications@Training
 
-@skill:Technical Writing:88:green
+@skill:Technical Writing:7:green:10@Documentation@SOP@Markdown@Confluence@Manuals@Flowcharts@Wiki
 
-@skill:Workshop Facilitation:85:green
+@skill:Workshop Facilitation:4:green:10@JAD@Brainstorming@Design Thinking@Remote Workshops@Miro@Mural

@@ -219,6 +219,9 @@
     .skill-files {
         width: 100%;
         margin-top: 5px;
+        /* Remove any height limitations */
+        max-height: none;
+        height: auto;
     }
     
     .skill-file {
@@ -454,6 +457,9 @@
         width: 100%;
         margin-top: 5px;
         padding: 5px;
+        /* Remove any height limitations */
+        max-height: none;
+        height: auto;
     }
     
     .skill-file {

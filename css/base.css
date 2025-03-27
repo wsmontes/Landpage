@@ -114,11 +114,13 @@ html, body {
     padding: 8px;
     font-family: "Lucida Console", Monaco, monospace;
     box-shadow: 4px 4px #000;
-    max-height: 300px;
-    overflow-y: auto;
+    /* Remove max-height and overflow to allow dynamic expansion */
+    /* max-height: 300px; */
+    /* overflow-y: auto; */
 }
 
-/* Add custom scrollbar for the file directory to match the DOS theme */
+/* Remove custom scrollbar styles for the file directory since we're not using scrollbars anymore */
+/* 
 .skill-files::-webkit-scrollbar {
     width: 8px;
 }
@@ -130,7 +132,9 @@ html, body {
 .skill-files::-webkit-scrollbar-thumb {
     background-color: #00a8a8;
 }
+*/
 
+/* Skill files header */
 .skill-files-header {
     margin-bottom: 8px;
     padding-bottom: 5px;
@@ -170,6 +174,9 @@ html, body {
     word-wrap: break-word;
     white-space: normal;
     margin-bottom: 10px;
+    /* Ensure content expands naturally */
+    width: auto;
+    height: auto;
 }
 
 .subskill-loading {

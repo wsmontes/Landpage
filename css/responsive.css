@@ -111,6 +111,7 @@
     .content-area {
         height: auto;
         max-height: none;
+        overflow-y: visible; /* Change from auto to visible */
     }
     
     .skill-bar {
@@ -214,6 +215,7 @@
     
     .skill-info {
         width: 100%;
+        overflow: visible; /* Ensure no height restrictions */
     }
     
     .skill-files {
@@ -222,6 +224,7 @@
         /* Remove any height limitations */
         max-height: none;
         height: auto;
+        overflow: visible; /* Explicitly set overflow to visible */
     }
     
     .skill-file {
@@ -260,6 +263,7 @@
     .content-area {
         height: auto;
         padding: 5px;
+        overflow-y: visible; /* Change from auto to visible */
     }
     
     .section-content {
@@ -451,6 +455,7 @@
     
     .skill-info {
         width: 100%;
+        overflow: visible; /* Ensure no height restrictions */
     }
     
     .skill-files {
@@ -460,6 +465,7 @@
         /* Remove any height limitations */
         max-height: none;
         height: auto;
+        overflow: visible; /* Explicitly set overflow to visible */
     }
     
     .skill-file {

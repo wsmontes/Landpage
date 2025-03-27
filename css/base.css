@@ -68,6 +68,7 @@ html, body {
     margin-bottom: 35px;
     gap: 20px;
     align-items: flex-start;
+    overflow: visible;
 }
 
 .skill-info {
@@ -114,9 +115,9 @@ html, body {
     padding: 8px;
     font-family: "Lucida Console", Monaco, monospace;
     box-shadow: 4px 4px #000;
-    /* Remove max-height and overflow to allow dynamic expansion */
-    /* max-height: 300px; */
-    /* overflow-y: auto; */
+    /* Allow dynamic expansion */
+    height: auto;
+    overflow: visible;
 }
 
 /* Remove custom scrollbar styles for the file directory since we're not using scrollbars anymore */
@@ -177,6 +178,7 @@ html, body {
     /* Ensure content expands naturally */
     width: auto;
     height: auto;
+    overflow: visible;
 }
 
 .subskill-loading {

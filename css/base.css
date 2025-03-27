@@ -58,7 +58,7 @@ html, body {
 /* Main window */
 .tui-window.full-width {
     height: calc(100% - 80px);
-    margin-top: 40px;
+    margin-top: 40px; /* This ensures the window stays below the fixed nav bar */
     width: 100%;
     box-sizing: border-box;
 }
@@ -297,6 +297,12 @@ pre, code {
     padding: 0 10px;
     height: 30px;
     overflow: visible;
+    position: fixed; /* Change from absolute to fixed */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10; /* Ensure it stays on top */
+    width: 100%;
 }
 
 .tui-nav ul {

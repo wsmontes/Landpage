@@ -1,7 +1,7 @@
 # PROFESSIONAL PROFILE
 ---
 
-$green:Wagner Montes, o Divino
+$green:Wagner Montes
 $white:Business Analyst || Product Developer || Solution Architect
 
 I am a hybrid IT professional, with solid business analysis experience, product development background and coding skills. Comfortable working with complex business requirements as well as leading development directly. Hands-on experience with generative models, extensive technical background and huge interest in conversational solutions.

@@ -64,55 +64,32 @@ class SkillsRenderer {
     renderSubSkills(skillName, subSkills) {
         if (!subSkills.length) return '';
         
-        // Make a DOS-style drive volume name from the skill name
-        const volumeName = skillName.toUpperCase().replace(/[^A-Z0-9]/g, '_').substring(0, 8);
+        // Make directory name from the full skill name, replacing spaces with underscores
+        const volumeName = skillName.toUpperCase().replace(/\s+/g, '_').replace(/[^A-Z0-9_]/g, '');
         
-        // Current date in DOS format MM-DD-YYYY
-        const now = new Date();
-        const dosDate = `${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}-${now.getFullYear()}`;
-        
-        // Start building the directory listing
+        // Start building the directory listing - removed command line header
         let html = `
         <div class="skill-files">
-            <div class="skill-files-header white-168-text">C:\\${volumeName}> DIR /W<span class="dos-cursor">_</span></div>
             <div class="skill-files-list">
                 <div class="white-168-text" style="margin-bottom: 5px;">Directory of C:\\${volumeName}</div>`;
         
         // Generate each sub-skill as a "file"
         for (let i = 0; i < subSkills.length; i++) {
-            // Generate a random "file size" between 4KB and 64KB
-            const fileSize = Math.floor(Math.random() * 60000) + 4000;
-            
             // Use alternating colors for the files
             const fileColor = i % 2 === 0 ? 'cyan' : 'green';
             
-            // Clean up the sub-skill name for a DOS-compatible filename (8.3 format)
+            // Clean up the sub-skill name for a DOS-compatible filename
             let fileName = subSkills[i].trim().toUpperCase().replace(/[^A-Z0-9]/g, '_');
-            // Ensure maximum 8 chars for name
-            if (fileName.length > 8) fileName = fileName.substring(0, 8);
             
             html += `
                 <div class="skill-file">
                     <span class="${fileColor}-168-text skill-file-icon">■</span>
                     <span class="${fileColor}-168-text skill-file-name">${fileName}</span>
-                    <span class="white-168-text skill-file-ext">.DLL</span>
-                    <span class="skill-file-size">${fileSize} bytes</span>
-                    <span class="white-168-text" style="margin-left: 10px;">${dosDate}</span>
                 </div>`;
         }
         
-        // Add volume information as a footer (like in DOS)
-        const totalFiles = subSkills.length;
-        const bytesUsed = subSkills.reduce((total, _) => {
-            return total + Math.floor(Math.random() * 60000) + 4000;
-        }, 0);
-        const freeSpace = 655360 - bytesUsed; // 640KB ought to be enough for anybody
-        
+        // Close the HTML structure without adding volume information
         html += `
-                <div class="skill-volume-info">
-                    <div>${totalFiles} file(s) ${bytesUsed.toLocaleString()} bytes</div>
-                    <div>${freeSpace.toLocaleString()} bytes free</div>
-                </div>
             </div>
         </div>`;
         

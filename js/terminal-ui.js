@@ -111,12 +111,46 @@ function initTouchOptimizations() {
     });
 }
 
+// Handle dropdown menu behavior
+function setupDropdownBehavior() {
+    const sourceCodeDropdown = document.querySelector('.source-code-dropdown .tui-dropdown');
+    const dropdownContent = document.querySelector('.source-code-dropdown .tui-dropdown-content');
+    
+    if (!sourceCodeDropdown || !dropdownContent) return;
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+        // Check if click is outside the dropdown
+        if (!sourceCodeDropdown.contains(event.target)) {
+            dropdownContent.style.display = 'none';
+        }
+    });
+    
+    // Prevent dropdown from closing when clicking inside it
+    dropdownContent.addEventListener('click', function(event) {
+        event.stopPropagation();
+    });
+    
+    // Toggle dropdown when clicking the trigger
+    const dropdownTrigger = sourceCodeDropdown.querySelector('a');
+    if (dropdownTrigger) {
+        dropdownTrigger.addEventListener('click', function(event) {
+            // Toggle display
+            const isVisible = dropdownContent.style.display === 'block';
+            dropdownContent.style.display = isVisible ? 'none' : 'block';
+            event.preventDefault();
+            event.stopPropagation();
+        });
+    }
+}
+
 // Initialize terminal UI
 function initTerminalUI() {
     // Initial setup
     handleResponsiveLayout();
     optimizeNavbar();
     initTouchOptimizations();
+    setupDropdownBehavior(); // Add this line to initialize dropdown behavior
     
     // Add event listeners for window resize
     window.addEventListener('resize', function() {

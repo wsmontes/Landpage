@@ -704,6 +704,47 @@
         width: auto;
         min-width: 200px;
         max-width: 90vw;
+        z-index: 999; /* Increased z-index to ensure it's on top */
+        position: absolute; /* Ensure absolute positioning */
+    }
+    
+    /* Ensure the dropdown container is positioned correctly */
+    .tui-statusbar .source-code-dropdown {
+        position: relative;
+    }
+    
+    /* Mobile footer behavior - prevent direct link on first touch */
+    .tui-statusbar ul li a {
+        position: relative;
+    }
+    
+    /* Apply for the F10 item specifically */
+    .tui-statusbar .source-code-dropdown .tui-dropdown > a {
+        pointer-events: none; /* Disable direct link on first touch */
+    }
+    
+    /* Apply for the regular footer items */
+    .tui-statusbar ul li a.touch-expanded {
+        pointer-events: auto; /* Enable link on second touch */
+    }
+    
+    /* Make sure the dropdown toggle works */
+    .tui-statusbar .source-code-dropdown.touch-expanded .tui-dropdown > a {
+        pointer-events: auto; /* Enable dropdown toggle on second touch */
+    }
+    
+    /* Source code dropdown position */
+    .tui-statusbar .source-code-dropdown .tui-dropdown-content {
+        bottom: 100%;
+        right: 0;
+        left: auto;
+        width: auto;
+        min-width: 200px;
+        max-width: 90vw;
+        z-index: 1000; /* Increased z-index to ensure it's above everything */
+        position: absolute; /* Ensure absolute positioning */
+        background-color: #000080; /* Ensure background is opaque */
+        border: 1px solid #00a8a8; /* Add visible border */
     }
 }
 
@@ -758,5 +799,94 @@
     
     .about-content {
         margin-top: 4px;
+    }
+}
+
+/* Global styles for footer bar that apply at all screen sizes */
+.tui-statusbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    padding: 0 5px;
+    background-color: rgb(168, 168, 168);
+    position: relative; /* Ensure relative positioning for proper stacking context */
+}
+
+.tui-statusbar ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tui-statusbar ul li {
+    margin: 0 5px;
+    position: relative; /* Ensure relative positioning for dropdowns */
+}
+
+/* Add hover effect for all footer items including F10 */
+.tui-statusbar ul li:hover,
+.tui-statusbar .source-code-dropdown:hover {
+    background-color: #00aa00; /* Green highlight on hover like other items */
+}
+
+/* Source code dropdown positioning for all screen sizes */
+.source-code-dropdown {
+    position: relative;
+}
+
+.source-code-dropdown .tui-dropdown-content {
+    position: absolute;
+    min-width: 240px;
+    right: 0;
+    left: auto;
+    bottom: 44px; /* Position above the footer, previously was using bottom: 100% */
+    z-index: 99999; /* Extremely high z-index to overcome any stacking issues */
+    background-color: #000080;
+    border: 1px solid #00a8a8;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.5); /* Add shadow for better visibility */
+}
+
+/* Fix dropdown positioning and visibility */
+.tui-dropdown-content {
+    transform: translateY(0); /* Ensure no transform is affecting position */
+    visibility: visible !important; /* Force visibility when shown */
+    opacity: 1 !important; /* Force opacity when shown */
+}
+
+/* Ensure footer is properly positioned */
+.tui-statusbar.fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+/* Right-aligned menu in status bar */
+.tui-statusbar .right-align-menu {
+    margin-left: auto;
+    display: flex;
+}
+
+/* Ensure the F10 dropdown is clickable */
+.tui-statusbar .source-code-dropdown .tui-dropdown > a {
+    cursor: pointer;
+    pointer-events: auto !important; /* Ensure clickability */
+}
+
+/* Fix for dropdown appearing behind content on mobile */
+@media screen and (max-width: 575px) {
+    .tui-statusbar .source-code-dropdown .tui-dropdown-content {
+        bottom: 44px; /* Ensure consistent placement above the footer */
+        position: fixed; /* Use fixed positioning on mobile for better stacking */
+        z-index: 99999; /* Extremely high z-index */
+    }
+    
+    /* Reset any conflicting mobile styles */
+    .tui-statusbar ul li a.touch-expanded,
+    .tui-statusbar .source-code-dropdown.touch-expanded .tui-dropdown > a {
+        pointer-events: auto; /* Enable all interactions */
     }
 }

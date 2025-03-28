@@ -144,6 +144,71 @@ function setupDropdownBehavior() {
     }
 }
 
+/**
+ * Initialize two-touch behavior for mobile footer
+ * First touch: Show text, Second touch: Follow link
+ */
+function initTwoTouchFooter() {
+    if (window.innerWidth > 575) return; // Only for mobile
+    
+    const footerItems = document.querySelectorAll('.tui-statusbar ul li');
+    
+    footerItems.forEach(item => {
+        const link = item.querySelector('a');
+        if (!link) return;
+        
+        // Remove existing click handlers to prevent conflicts
+        item.removeEventListener('click', handleFooterItemClick);
+        
+        // Add new click handler
+        item.addEventListener('click', handleFooterItemClick);
+    });
+}
+
+/**
+ * Handle click on footer item for two-touch behavior
+ */
+function handleFooterItemClick(e) {
+    const item = this;
+    const link = item.querySelector('a');
+    
+    // If this is the source code dropdown, handle differently
+    const isSourceCode = item.classList.contains('source-code-dropdown');
+    
+    // Check if this is the first touch (not expanded yet)
+    if (!item.classList.contains('touch-expanded')) {
+        e.preventDefault(); // Prevent default action
+        e.stopPropagation(); // Stop event propagation
+        
+        // Remove expanded class from all items
+        document.querySelectorAll('.tui-statusbar ul li').forEach(i => {
+            i.classList.remove('touch-expanded');
+        });
+        
+        // Add expanded class to this item
+        item.classList.add('touch-expanded');
+        
+        // Set a higher flex value to show the text
+        item.style.flex = '3';
+        
+        // Show the text
+        const textSpan = link.querySelector('span + span');
+        if (textSpan) {
+            textSpan.style.position = 'static';
+            textSpan.style.opacity = '1';
+            textSpan.style.marginLeft = '4px';
+        }
+        
+        // Make the link work on second touch
+        if (link) {
+            link.classList.add('touch-expanded');
+        }
+        return;
+    }
+    
+    // Let the event propagate for the second touch (link will work normally)
+}
+
 // Initialize terminal UI
 function initTerminalUI() {
     // Initial setup
@@ -151,11 +216,13 @@ function initTerminalUI() {
     optimizeNavbar();
     initTouchOptimizations();
     setupDropdownBehavior(); // Add this line to initialize dropdown behavior
+    initTwoTouchFooter(); // Initialize two-touch behavior for mobile footer
     
     // Add event listeners for window resize
     window.addEventListener('resize', function() {
         handleResponsiveLayout();
         optimizeNavbar();
+        initTwoTouchFooter(); // Re-initialize two-touch behavior when screen size changes
     });
     
     // Handle iOS orientation changes specifically

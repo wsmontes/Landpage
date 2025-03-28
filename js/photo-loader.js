@@ -365,6 +365,28 @@ class PhotoLoader {
         
         console.log('Starting animation');
         this.animationStartTime = Date.now();
+        
+        // Remove forced scroll locking to decouple animation from scrolling.
+        // ...existing code removed...
+        // document.body.style.overflow = '';
+        // document.documentElement.style.overflow = '';
+        // const contentArea = document.querySelector('.content-area');
+        // if (contentArea) {
+        //     contentArea.style.height = 'auto';
+        //     contentArea.style.maxHeight = 'none';
+        //     contentArea.style.overflowY = 'visible';
+        // }
+        // Remove scroll event listeners that try to unlock scrolling.
+        // window.addEventListener('scroll', ensureScrolling, { passive: true });
+        // window.addEventListener('touchmove', ensureScrolling, { passive: true });
+        // window.addEventListener('wheel', ensureScrolling, { passive: true });
+        // setTimeout(() => {
+        //     window.removeEventListener('scroll', ensureScrolling);
+        //     window.removeEventListener('touchmove', ensureScrolling);
+        //     window.removeEventListener('wheel', ensureScrolling);
+        // }, this.options.duration + 100);
+        
+        // Now simply run the animation independently
         this.animateFrame();
     }
     

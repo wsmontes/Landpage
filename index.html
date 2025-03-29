@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <!-- Update viewport meta tag to explicitly disable user-scaling for better iOS behavior -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- Add cache control meta tags -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
     <title>Wagner Montes - Web Developer & UI Designer</title>
     <meta name="description" content="Portfolio and professional website of Wagner Montes, specializing in business analysis, product design, and interactive interfaces.">
     <meta name="keywords" content="Wagner Montes, business analysis, product design, LLM, interactivity, digital transformation, AI">
@@ -297,6 +303,8 @@
     </div>
 
     <!-- JavaScript -->
+    <!-- Add cache manager first, before other scripts -->
+    <script src="js/cache-manager.js"></script>
     <script src="tuicss.min.js"></script>
     <!-- Debug helper first to provide debugging tools -->
     <script src="js/debug-helper.js"></script>

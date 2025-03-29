@@ -286,6 +286,8 @@
         overflow: auto;
         height: auto; /* Reset height for mobile */
         -webkit-text-size-adjust: 100%; /* Prevent iOS font size adjustments */
+        overflow-y: auto; /* Ensure scrolling works */
+        -webkit-overflow-scrolling: touch; /* Enable smooth scrolling */
     }
     
     .fullscreen-container {
@@ -312,6 +314,10 @@
         height: auto;
         padding: 5px;
         overflow-y: visible; /* Change from auto to visible */
+        -webkit-overflow-scrolling: touch; /* Ensure smooth scrolling on mobile */
+        max-height: none;
+        overflow-y: auto; /* Ensure scrolling works */
+        -webkit-overflow-scrolling: touch; /* Enable smooth scrolling */
     }
     
     .section-content {
@@ -745,6 +751,13 @@
         position: absolute; /* Ensure absolute positioning */
         background-color: #000080; /* Ensure background is opaque */
         border: 1px solid #00a8a8; /* Add visible border */
+    }
+    
+    .content-area {
+        height: auto;
+        max-height: none;
+        overflow-y: auto; /* Ensure scrolling works */
+        -webkit-overflow-scrolling: touch; /* Enable smooth scrolling */
     }
 }
 

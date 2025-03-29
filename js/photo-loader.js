@@ -13,7 +13,7 @@ class PhotoLoader {
             startPixelation: 24, // Start extremely pixelated (more 8-bit like)
             endPixelation: 1, // End with no pixelation (normal image)
             colorReduction: true, // Use reduced color palette during animation
-            frameRate: 30 // Frames per second
+            frameRate: 5 // Frames per second
         }, options);
         
         this.container = null;
@@ -366,27 +366,7 @@ class PhotoLoader {
         console.log('Starting animation');
         this.animationStartTime = Date.now();
         
-        // Remove forced scroll locking to decouple animation from scrolling.
-        // ...existing code removed...
-        // document.body.style.overflow = '';
-        // document.documentElement.style.overflow = '';
-        // const contentArea = document.querySelector('.content-area');
-        // if (contentArea) {
-        //     contentArea.style.height = 'auto';
-        //     contentArea.style.maxHeight = 'none';
-        //     contentArea.style.overflowY = 'visible';
-        // }
-        // Remove scroll event listeners that try to unlock scrolling.
-        // window.addEventListener('scroll', ensureScrolling, { passive: true });
-        // window.addEventListener('touchmove', ensureScrolling, { passive: true });
-        // window.addEventListener('wheel', ensureScrolling, { passive: true });
-        // setTimeout(() => {
-        //     window.removeEventListener('scroll', ensureScrolling);
-        //     window.removeEventListener('touchmove', ensureScrolling);
-        //     window.removeEventListener('wheel', ensureScrolling);
-        // }, this.options.duration + 100);
-        
-        // Now simply run the animation independently
+        // Ensure no scrolling manipulation occurs
         this.animateFrame();
     }
     

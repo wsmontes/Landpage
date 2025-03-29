@@ -15,9 +15,6 @@ function handleResponsiveLayout() {
     // Calculate proper height based on screen size
     if (windowWidth <= 767) { // Both small and tablet sizes
         // Mobile & tablets - scrollable body
-        document.body.style.overflow = 'auto';
-        document.documentElement.style.overflow = 'auto';
-        
         if (contentArea) {
             contentArea.style.height = 'auto';
             contentArea.style.maxHeight = 'none';
@@ -38,9 +35,6 @@ function handleResponsiveLayout() {
         }
     } else {
         // Desktop - terminal style with fixed container
-        document.body.style.overflow = 'hidden';
-        document.documentElement.style.overflow = 'hidden';
-        
         if (contentArea) {
             // Account for navbar, tabs, and status bar
             const navHeight = document.querySelector('.tui-nav')?.offsetHeight || 30;
@@ -86,28 +80,17 @@ function optimizeNavbar() {
 
 // Mobile touch optimizations
 function initTouchOptimizations() {
-    // Add passive touch handlers for better scrolling performance
     const contentArea = document.querySelector('.content-area');
     if (contentArea) {
-        contentArea.addEventListener('touchstart', function() {}, {passive: true});
-        contentArea.addEventListener('touchmove', function() {}, {passive: true});
+        // Ensure smooth scrolling without interfering with touch events
+        contentArea.style.webkitOverflowScrolling = 'touch';
     }
-    
-    // Make dropdown menus more touch-friendly
+
+    // Remove unnecessary touch event listeners
     const dropdowns = document.querySelectorAll('.tui-dropdown');
     dropdowns.forEach(dropdown => {
-        dropdown.addEventListener('touchstart', function(e) {
-            // Toggle dropdown on touch
-            const content = this.querySelector('.tui-dropdown-content');
-            if (content) {
-                if (content.style.display === 'block') {
-                    content.style.display = 'none';
-                } else {
-                    content.style.display = 'block';
-                }
-                e.preventDefault(); // Prevent immediate closing
-            }
-        });
+        dropdown.removeEventListener('touchstart', () => {}); // Remove redundant listeners
+        dropdown.removeEventListener('touchmove', () => {}); // Remove redundant listeners
     });
 }
 

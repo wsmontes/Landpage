@@ -3,10 +3,9 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     font-family: "Lucida Console", Monaco, monospace;
-    /* Fix iOS Safari overflow issues */
-    -webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch; /* Ensure smooth scrolling */
+    overflow-y: auto; /* Allow scrolling */
     position: relative;
 }
 
@@ -39,6 +38,7 @@ html, body {
 .content-area {
     height: calc(100vh - 120px);
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
     padding: 10px;
 }
 

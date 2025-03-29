@@ -98,7 +98,8 @@ function addDebugMessage(message, type = 'info') {
 // Initialize the debug tools when the DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     if (DEBUG_MODE) {
-        createDebugPanel();
+        // Comment out the debug panel creation
+        // createDebugPanel();
         addDebugMessage('Debug tools initialized', 'success');
         
         // Check if the required components are loaded
@@ -122,3 +123,29 @@ document.addEventListener('DOMContentLoaded', function() {
 window.debugLog = debugLog;
 window.inspectObject = inspectObject;
 window.addDebugMessage = addDebugMessage;
+
+function logScrollingInterferenceEvents() {
+    const logEvent = (event) => {
+        console.log(`[DEBUG] Event: ${event.type}`, {
+            target: event.target,
+            timeStamp: event.timeStamp,
+            defaultPrevented: event.defaultPrevented,
+            cancelable: event.cancelable,
+            bubbles: event.bubbles,
+        });
+    };
+
+    // Add listeners for potential scrolling interference events
+    ['touchstart', 'touchmove', 'touchend', 'wheel', 'scroll'].forEach((eventType) => {
+        document.addEventListener(eventType, logEvent, { passive: false, capture: true });
+    });
+
+    console.log('[DEBUG] Scroll interference event logging initialized.');
+}
+
+// Initialize logging when the DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    if (DEBUG_MODE) {
+        logScrollingInterferenceEvents();
+    }
+});

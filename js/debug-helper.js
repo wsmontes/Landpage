@@ -10,7 +10,6 @@ const DEBUG_MODE = false;
 function debugLog(...args) {
     if (DEBUG_MODE) {
         console.log('[DEBUG]', ...args);
-    }
 }
 
 // Function to inspect an object's contents
@@ -122,6 +121,4 @@ document.addEventListener('DOMContentLoaded', function() {
 window.debugLog = debugLog;
 window.inspectObject = inspectObject;
 window.addDebugMessage = addDebugMessage;
-
-
-});
+}

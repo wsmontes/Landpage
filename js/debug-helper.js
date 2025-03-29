@@ -92,7 +92,6 @@ function addDebugMessage(message, type = 'info') {
     content.appendChild(messageElem);
     
     // Auto-scroll to bottom
-    content.scrollTop = content.scrollHeight;
 }
 
 // Initialize the debug tools when the DOM is loaded
@@ -124,28 +123,5 @@ window.debugLog = debugLog;
 window.inspectObject = inspectObject;
 window.addDebugMessage = addDebugMessage;
 
-function logScrollingInterferenceEvents() {
-    const logEvent = (event) => {
-        console.log(`[DEBUG] Event: ${event.type}`, {
-            target: event.target,
-            timeStamp: event.timeStamp,
-            defaultPrevented: event.defaultPrevented,
-            cancelable: event.cancelable,
-            bubbles: event.bubbles,
-        });
-    };
 
-    // Add listeners for potential scrolling interference events
-    ['touchstart', 'touchmove', 'touchend', 'wheel', 'scroll'].forEach((eventType) => {
-        document.addEventListener(eventType, logEvent, { passive: false, capture: true });
-    });
-
-    console.log('[DEBUG] Scroll interference event logging initialized.');
-}
-
-// Initialize logging when the DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    if (DEBUG_MODE) {
-        logScrollingInterferenceEvents();
-    }
 });

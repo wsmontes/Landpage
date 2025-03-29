@@ -35,10 +35,6 @@ class PhotoLoader {
         
         this.setupContentObserver();
         
-        // Also try directly
-        setTimeout(() => {
-            this.setupPhoto();
-        }, 500);
     }
     
     /**

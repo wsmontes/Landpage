@@ -1,0 +1,62 @@
+/* Mobile-specific fixes for scrolling issues */
+
+/* Reset problematic scroll behaviors */
+html.mobile-view, 
+html.mobile-view body {
+    position: relative !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    height: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-overflow-scrolling: auto !important;
+}
+
+/* Prevent scroll locking on tui elements */
+html.mobile-view .tui-bg-blue-black,
+html.mobile-view .fullscreen-container {
+    position: relative !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow: visible !important;
+}
+
+/* Fix positioning for navbar and statusbar */
+html.mobile-view .tui-nav,
+html.mobile-view .tui-statusbar.absolute {
+    position: sticky !important;
+    z-index: 100;
+}
+
+html.mobile-view .tui-nav {
+    top: 0;
+}
+
+html.mobile-view .tui-statusbar.absolute {
+    bottom: 0;
+}
+
+/* Fix the main content area */
+html.mobile-view .tui-window.full-width {
+    height: auto !important;
+    min-height: calc(100vh - 110px) !important; /* Account for nav and statusbar */
+    overflow: visible !important;
+}
+
+/* Remove any fixed positioning that could cause issues */
+html.mobile-view .fixed-element,
+html.mobile-view [style*="position: fixed"],
+html.mobile-view [style*="position:fixed"] {
+    position: absolute !important;
+}
+
+/* Disable any animations that might interfere with scrolling */
+@media (max-width: 768px) {
+    * {
+        -webkit-transition: none !important;
+        -moz-transition: none !important;
+        -o-transition: none !important;
+        transition: none !important;
+    }
+}

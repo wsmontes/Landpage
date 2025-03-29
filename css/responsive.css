@@ -114,7 +114,6 @@
         height: auto;
         max-height: none;
         overflow-y: visible; /* Change from auto to visible */
-        -webkit-overflow-scrolling: touch; /* Add for iOS scrolling */
     }
     
     .skill-bar {
@@ -164,7 +163,6 @@
         justify-content: center;
         order: 2;
         flex: 0 1 auto; /* Allow shrinking but not growing */
-        overflow-x: auto; /* Allow horizontal scrolling if needed */
         scrollbar-width: none; /* Hide scrollbar in Firefox */
         -ms-overflow-style: none; /* Hide scrollbar in IE/Edge */
     }
@@ -286,8 +284,6 @@
         overflow: auto;
         height: auto; /* Reset height for mobile */
         -webkit-text-size-adjust: 100%; /* Prevent iOS font size adjustments */
-        overflow-y: auto; /* Ensure scrolling works */
-        -webkit-overflow-scrolling: touch; /* Enable smooth scrolling */
     }
     
     .fullscreen-container {
@@ -314,10 +310,7 @@
         height: auto;
         padding: 5px;
         overflow-y: visible; /* Change from auto to visible */
-        -webkit-overflow-scrolling: touch; /* Ensure smooth scrolling on mobile */
         max-height: none;
-        overflow-y: auto; /* Ensure scrolling works */
-        -webkit-overflow-scrolling: touch; /* Enable smooth scrolling */
     }
     
     .section-content {
@@ -756,8 +749,6 @@
     .content-area {
         height: auto;
         max-height: none;
-        overflow-y: auto; /* Ensure scrolling works */
-        -webkit-overflow-scrolling: touch; /* Enable smooth scrolling */
     }
 }
 

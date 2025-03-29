@@ -4,7 +4,6 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: "Lucida Console", Monaco, monospace;
-    -webkit-overflow-scrolling: touch; /* Ensure smooth scrolling */
     overflow-y: auto; /* Allow scrolling */
     position: relative;
 }
@@ -23,7 +22,6 @@ html, body {
     /* Force content to be visible */
     .content-area, .skill-files, .subskill-content {
         overflow-y: visible !important;
-        -webkit-overflow-scrolling: touch;
     }
 }
 
@@ -38,7 +36,6 @@ html, body {
 .content-area {
     height: calc(100vh - 120px);
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
     padding: 10px;
 }
 
@@ -178,20 +175,6 @@ h3 {
     -webkit-overflow-scrolling: touch;
 }
 
-/* Remove custom scrollbar styles for the file directory since we're not using scrollbars anymore */
-/* 
-.skill-files::-webkit-scrollbar {
-    width: 8px;
-}
-
-.skill-files::-webkit-scrollbar-track {
-    background-color: #000;
-}
-
-.skill-files::-webkit-scrollbar-thumb {
-    background-color: #00a8a8;
-}
-*/
 
 /* Skill files header */
 .skill-files-header {

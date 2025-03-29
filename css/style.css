@@ -1,0 +1,28 @@
+// ...existing code...
+
+/* Mobile Scrolling Fixes */
+html, body {
+    overflow-x: hidden;
+    position: relative;
+    height: auto;
+    -webkit-overflow-scrolling: touch; /* Enables momentum scrolling for iOS */
+}
+
+/* Fix for position:fixed elements on mobile */
+@media screen and (max-width: 768px) {
+    .fixed-element {
+        position: absolute;
+    }
+    
+    /* Prevent content from being hidden under fixed headers/footers */
+    main {
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-top: env(safe-area-inset-top);
+    }
+}
+
+/* Ensure touch events work properly */
+* {
+    touch-action: manipulation; /* Improves touch responsiveness */
+}
+// ...existing code...

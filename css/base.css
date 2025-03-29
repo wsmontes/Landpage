@@ -60,6 +60,13 @@ html, body {
     box-sizing: border-box;
 }
 
+/* Ensure responsive margins for main window */
+@media screen and (max-width: 767px) {
+    .tui-window.full-width {
+        margin-top: 10px; /* Reduced margin for mobile devices */
+    }
+}
+
 .tui-fieldset {
     height: 100%;
     display: flex;
